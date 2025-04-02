@@ -1,0 +1,20 @@
+---
+import {readdir} from "node:fs/promises";
+import Page from "../../../../layouts/Page.astro";
+
+export const prerender = false;
+const regex = /^[a-z-]{1,20}$/;
+
+if(!Astro.params.form || !regex.test(Astro.params.form)) {
+    Astro.redirect("/404");
+    return;
+}
+
+const files = (await readdir("messages/" + Astro.params.form))
+    .filter((file: string) => file.endsWith(".md")).map((file: string) => file.split(".")[0]);
+---
+<Page title="Nachrichten">
+    {files.map((file: string) => (
+        <a href={"/admin/message/" + Astro.params.form + "/" + file}>{file}</a>
+    ))}
+</Page>

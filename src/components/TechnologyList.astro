@@ -1,0 +1,66 @@
+---
+import {Image} from "astro:assets";
+import BrandIcon from "./BrandIcon.astro";
+import "bulma/sass/grid/grid.scss";
+import type { CollectionEntry } from "astro:content";
+import type { ImageMetadata } from "astro";
+
+type Skill = CollectionEntry<"skill">['data'];
+const skill = Astro.props.skill as Skill;
+---
+<i class="icon">add</i>
+<input type="checkbox" name={skill.icon ?? skill.name} id={skill.icon ?? skill.name}>
+<div class="expandable cell">
+    <div class="technologies">
+        {skill.tech?.map((tech: {name: string, icon?: string, image?: ImageMetadata}) => (
+            <div class="cell tech-cell">
+                {tech.icon != undefined ? (<BrandIcon icon={tech.icon} />) : tech.image && (<Image src={tech.image} alt="" />)}
+                <p>{tech.name}</p>
+            </div>
+        ))}
+    </div>
+</div>
+<style>
+    input {
+        display: none;
+    }
+
+    .expandable {
+        width: 100%;
+        overflow: hidden;
+        height: 0;
+        transition: transform 0.5s, height 0.5s;
+        transform: scale(0);
+    }
+
+    input:checked + .expandable {
+        display: block;
+        height: auto;
+        transform: scale(100%);
+    }
+
+    .expandable .technologies {
+        background-color: var(--bulma-primary-25);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: space-around;
+    }
+
+    .cell.tech-cell {
+		text-align: center;
+		background-color: var(--bulma-primary-20);
+		border-radius: 1em;
+		padding: 1em 0.5em;
+		color: var(--bulma-primary-50);
+		font-weight: bold;
+        flex-grow: 1;
+        flex-basis: 15%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        max-width: 120px;
+	}
+
+</style>

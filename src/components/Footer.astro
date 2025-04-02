@@ -1,0 +1,22 @@
+---
+import "bulma/sass/layout/footer.scss";
+const today = new Date();
+---
+<footer class="footer">
+	<nav class="navbar" role="navigation">
+		<a class="navbar-item" href="/legal">Impressum</a>
+		<a class="navbar-item" href="/privacy">Datenschutz</a>
+	</nav>
+	<p>&copy; {today.getFullYear()} Friedrich Zimniak</p>
+</footer>
+<style lang="scss">
+	footer {
+		z-index: 20;
+		--bulma-footer-padding: 1rem 1.1rem 1rem;
+	}
+
+	footer nav {
+		background-color: var(--bulma-primary-10);
+		color: var(--bulma-primary-50);
+	}
+</style>

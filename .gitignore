@@ -1,0 +1,18 @@
+# dependencies
+node_modules/
+
+# logs
+npm-debug.log*
+
+# build output
+dist/
+.astro/
+
+# contact form messages
+messages/
+
+# site configuration
+src/config.ts
+
+# macOS-specific files
+.DS_Store

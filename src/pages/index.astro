@@ -1,0 +1,66 @@
+---
+import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+import Page from '../layouts/Page.astro';
+import "bulma/sass/grid/grid.scss";
+import "bulma/sass/elements/progress.scss";
+import Skill from '../components/Skill.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+type SkillEntry = CollectionEntry<"skill">;
+const skills = await getCollection("skill");
+---
+
+<Page title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<h1 class="title">Über Mich</h1>
+	<h2 class="subtitle">Fähigkeiten</h2>
+	<div class="skill-grid">
+		{skills.map((skill: SkillEntry) => (
+			<Skill skill={skill.data} />
+		))}
+	</div>
+</Page>
+<script>
+	let transition = 0;
+	const grid = document.querySelector(".skill-grid");
+
+	document.querySelectorAll(".skill-cell > input").forEach(el => {
+		grid?.classList.add("script-active");
+
+		el.addEventListener("change", (e) => {
+			if((e.target as HTMLInputElement).checked) {
+				el.parentElement?.classList.add("toggled");
+			}
+		});
+
+		el.parentElement?.addEventListener("transitionstart", (e: TransitionEvent) => {
+			if(e.target instanceof HTMLElement && e.target.classList.contains("toggled") && e.propertyName == "flex-basis") {
+				const targetEl = e.target as HTMLElement;
+				transition++;
+				if(transition > 1) {
+					setTimeout(() => targetEl.classList.remove("toggled"), 50);
+					transition = 0;
+				}
+			}
+		});
+	});
+</script>
+<style is:global>
+	.skill-grid {
+		display: flex;
+		justify-content: space-around;
+		align-content: flex-start;
+		flex-direction: row;
+		flex-wrap: wrap;
+		column-gap: 1.5rem;
+		position: relative;
+		max-width: 600px;
+	}
+
+	.skill-grid:has(input:checked) .skill-cell:not(:has(> input:checked)), .skill-grid:has(.toggled) .skill-cell:not(:has(> input:checked)) {
+		padding: 0;
+		margin: 0;
+		height: 0;
+		transform: scale(0);
+		background-color: transparent;
+	}
+</style>

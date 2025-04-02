@@ -1,0 +1,13 @@
+---
+import {icons} from "@iconify-json/logos";
+
+if(!(Astro.props.icon in icons.icons)) {
+    throw new Error(`Invalid Icon ${JSON.stringify(Astro.props.icon)}`);
+}
+
+const icon = icons.icons[Astro.props.icon as string];
+const viewbox = `${icon.top ?? icons.top ?? 0} ${icon.left ?? icons.left ?? 0} ${icon.width ?? icons.width} ${icon.height ?? icons.height}`;
+
+const iconSvg = Astro.props.color ? icon.body.replaceAll(/fill="#[a-zA-Z0-9]+"/g, "fill=\"" + Astro.props.color + "\"") : icon.body;
+---
+<svg xmlns="http://www.w3.org/2000/svg" width={Astro.props.width ?? 64} height={Astro.props.height ?? 64} viewBox={viewbox} set:html={iconSvg}></svg>

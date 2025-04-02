@@ -1,0 +1,20 @@
+---
+import FormattedDate from "../../../../components/FormattedDate.astro";
+import Page from "../../../../layouts/Page.astro";
+
+export const prerender = false;
+
+if(!Astro.params.id && !Astro.params.form) {
+    return;
+}
+
+const message = await import("../../../../../messages/" + Astro.params.form + "/" + Astro.params.id + ".md");
+---
+<Page title="Nachricht">
+    <p>ID: {message.id}</p>
+    <p>Von: {message.frontmatter.email}</p>
+    <p>Erstellt am: <FormattedDate date={new Date(message.frontmatter.created)}></p>
+    <pre>
+        {message.compiledContent}
+    </pre>
+</Page>

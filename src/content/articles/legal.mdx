@@ -1,0 +1,30 @@
+---
+title: Impressum
+---
+import ContactForm from "../../components/ContactForm.astro";
+import { string, z } from "astro:schema";
+
+Friedrich Zimniak
+
+c/o Block Services
+
+Stuttgarter Str. 106
+
+70736 Fellbach
+
+Deutschland
+
+<br/>
+
+E-Mail: legal@frizim.com
+
+### Kontaktformular
+<ContactForm origin="/legal" fields={[{name: "email", type: "email", label: "E-Mail"}]} />
+
+<br/>
+Verantwortlicher i.S.d. § 18 Abs. 2 MStV:
+
+Friedrich Zimniak, Stuttgarter Str. 106, 70736 Fellbach
+
+<br/>
+Version: 19.03.2025, 17:34:15 CET

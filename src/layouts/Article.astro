@@ -1,0 +1,40 @@
+---
+import Page from './Page.astro';
+import { SITE_DESCRIPTION } from '../config';
+import { getEntry, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+const entry = await getEntry("article", Astro.props.aid) as CollectionEntry<"article">;
+const {Content} = await render(entry);
+---
+<Page title={entry.data.title} description={SITE_DESCRIPTION}>
+    <h1 class="title">{entry.data.title}</h1>
+    <article>
+        <Content />
+    </article>
+</Page>
+<style is:global>
+    h2 {
+        font-size: 1.5rem;
+        margin-top: 0.5em;
+    }
+
+    h3 {
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin-top: 0.25em;
+    }
+
+    h4 {
+        font-weight: bold;
+        font-size: 1em;
+    }
+
+    ul {
+        list-style-type: circle;
+    }
+
+    ul li {
+        margin-bottom: 0.25rem;
+    }
+</style>

@@ -1,0 +1,55 @@
+---
+import NavLink from "./NavLink.astro";
+---
+<details>
+    <summary class="navbar-item has-dropdown is-active">
+        <NavLink><slot name="opener" /><i class="icon">arrow_drop_down</i></NavLink>
+    </summary>
+    <slot />
+</details>
+
+<style>
+	details {
+		transition: all 0.5s;
+        
+	}
+
+    details::details-content {
+        opacity: 0;
+        block-size: 0;
+        overflow-y: clip;
+    }
+
+    details[open]::details-content {
+        opacity: 1;
+        block-size: auto;
+    }
+
+	details summary {
+		box-sizing: border-box;
+        padding-right: 0;
+	}
+
+    details summary i {
+        margin-left: auto;
+        transition: transform 0.5s;
+    }
+
+    details[open] summary i {
+        transform: rotate(180deg);
+    }
+
+	details summary p {
+		width: 100%;
+	}
+
+	details summary::marker {
+		display: none;
+		content: "";
+	}
+
+    details[open]:has(.navbar-item) span {
+        width: 100%;
+        padding: inherit;
+    }
+</style>

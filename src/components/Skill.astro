@@ -1,0 +1,53 @@
+---
+import {Image} from "astro:assets";
+import BrandIcon from "./BrandIcon.astro";
+import TechnologyList from "./TechnologyList.astro";
+import type { CollectionEntry } from "astro:content";
+import "bulma/sass/grid/grid.scss";
+
+type Skill = CollectionEntry<'skill'>['data'];
+const skill = Astro.props.skill as Skill;
+---
+<label class="skill-cell" for={skill.icon ?? skill.name}>
+    {skill.icon != undefined ? (<BrandIcon icon={skill.icon} />) : skill.image && (<Image src={skill.image} alt="" />)}
+    <p>{skill.name}</p>
+    <progress class="progress is-primary is-small" max="100" value={skill.level}></progress>
+	{skill.tech && (<TechnologyList skill={skill} />)}
+</label>
+<style>
+    .skill-cell {
+		text-align: center;
+		background-color: var(--bulma-primary-20);
+		border-radius: 1em;
+		padding: 1em 0.5em;
+		color: var(--bulma-primary-50);
+		font-weight: bold;
+		flex-basis: 20%;
+		flex-grow: 1;
+		aspect-ratio: 1 / 1;
+		transition: all 0.5s;
+		margin-bottom: 1.5rem;
+		user-select: none;
+		max-width: 30%;
+	}
+
+	.skill-cell > img, .skill-cell > svg {
+		max-height: 4em;
+	}
+
+	.skill-cell:hover {
+		background-color: hsl(var(--bulma-primary-h), var(--bulma-primary-s), calc(var(--bulma-primary-30-l)));
+	}
+
+	.skill-cell:has(> input:checked) {
+        background-color: var(--bulma-primary-25);
+		flex-basis: 100%;
+		max-width: 100%;
+    }
+
+	.progress {
+		height: 0.25em;
+		margin: 0.2em 0;
+		background-color: var(--bulma-primary-05);
+	}
+</style>

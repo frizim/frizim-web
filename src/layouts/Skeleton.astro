@@ -1,0 +1,82 @@
+---
+import { SITE_TITLE } from '../config';
+import "@fontsource/inter/latin-ext.css";
+import "@fontsource/material-symbols-sharp";
+
+interface Props {
+	title: string;
+	description: string;
+	image?: string;
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
+---
+<html lang="de" class="theme-dark">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+        <link rel="sitemap" href="/sitemap-index.xml">
+    
+        <title>{title} - {SITE_TITLE}</title>
+        <meta name="title" content={title}>
+        <meta name="description" content={description}>
+        <meta name="generator" content={Astro.generator}>
+        <meta name="referrer" content="no-referrer">
+        <link rel="canonical" href={canonicalURL}>
+    
+        <meta property="og:type" content="website">
+        <meta property="og:url" content={Astro.url}>
+        <meta property="og:title" content={title}>
+        <meta property="og:description" content={description}>
+        <meta property="og:image" content={new URL(image, Astro.url)}>
+    </head>
+    <body>
+        <slot/>
+    </body>
+</html>
+<style lang="scss" is:global>
+    @use "bulma/sass/utilities" with (
+        $family-primary: '"Inter", "Roboto", "Helvetica Neue", "Arial", sans-serif',
+        $family-secondary: 'Inter,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif'
+    );
+
+    @forward "bulma/sass/base";
+    @forward "bulma/sass/components/card";
+    @forward "bulma/sass/components/navbar";
+    @forward "bulma/sass/elements/content";
+    @forward "bulma/sass/layout/footer";
+
+    @forward "bulma/sass/themes";
+
+    :root {
+        --bulma-primary-h: 178deg;
+        --bulma-primary-s: 83%;
+        --bulma-primary-l: 45%;
+        --bulma-scheme-h: 178;
+        --bulma-scheme-s: 85%;
+        --bulma-light-l: 95%;
+        --bulma-dark-l: 20%;
+        --bulma-link: hsl(178deg, 100%, 80%);
+        --bulma-family-primary: Inter,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+        --bulma-family-code: Hack,Roboto Mono,Source Code Pro,monospace;
+        --bulma-body-family: Inter,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif;
+        --bulma-body-background-color: #0c0c0c;
+    }
+
+    html, body {
+        height: 100%;
+    }
+
+    body {
+        display: grid;
+        grid-template-rows: 1fr 0fr;
+    }
+    
+    footer {
+        grid-row: 2 / 2;
+    }
+</style>

@@ -1,0 +1,35 @@
+---
+const {href} = Astro.props;
+const active = href ? href.replace(import.meta.env.BASE_URL, '') == Astro.url.pathname.replace(import.meta.env.BASE_URL, '') : false;
+---
+{href ? 
+    (<a class:list={["navbar-item", active && "is-selected"]} href={href}><slot/><span></span></a>) : 
+    (<p class:list={["navbar-item", active && "is-selected"]}><slot/><span></span></p>)
+}
+<style>
+    .navbar-item {
+		display: flex;
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+        user-select: none;
+	}
+
+	.navbar-item.is-selected {
+		background-color: inherit;
+	}
+
+    .navbar-item span {
+        width: 0;
+        border-bottom: 2px solid hsl(var(--bulma-primary-h), var(--bulma-primary-s), calc(var(--bulma-primary-30-l)));
+        transition: width 0.5s;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    .navbar-item.is-selected span, .navbar-item:hover span {
+        width: 100%;
+        padding: inherit;
+    }
+</style>

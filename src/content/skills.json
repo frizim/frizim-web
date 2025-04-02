@@ -1,0 +1,206 @@
+{
+	"java": {
+		"name": "Java",
+		"icon": "java",
+		"level": 90,
+		"tech": [
+			{
+				"name": "Spring",
+				"icon": "spring"
+			},
+			{
+				"name": "Quarkus",
+				"icon": "quarkus"
+			},
+			{
+				"name": "Hibernate",
+				"icon": "hibernate"
+			},
+			{
+				"name": "JUnit",
+				"image": "../img/junit.png"
+			},
+			{
+				"name": "Maven",
+				"icon": "maven"
+			}
+		]
+	},
+	"javascript": {
+		"name": "JavaScript",
+		"icon": "javascript",
+		"level": 80,
+		"tech": [
+			{
+				"name": "TypeScript",
+				"icon": "typescript-icon"
+			},
+			{
+				"name": "Node.js",
+				"icon": "nodejs"
+			},
+			{
+				"name": "React",
+				"icon": "react"
+			},
+			{
+				"name": "Vue",
+				"icon": "vue"
+			},
+			{
+				"name": "Nuxt",
+				"icon": "nuxt"
+			},
+			{
+				"name": "Express.js",
+				"icon": "express"
+			},
+			{
+				"name": "Fastify",
+				"icon": "fastify-icon"
+			},
+			{
+				"name": "HTMX",
+				"icon": "htmx-icon"
+			},
+			{
+				"name": "Astro",
+				"icon": "astro"
+			},
+			{
+				"name": "MERN/MEVN Stack",
+				"icon": "mern"
+			},
+			{
+				"name": "jQuery",
+				"icon": "jquery"
+			},
+			{
+				"name": "Webpack",
+				"icon": "webpack"
+			}
+		]
+	},
+	"php": {
+		"name": "PHP",
+		"icon": "php",
+		"level": 90,
+		"tech": [
+			{
+				"name": "Laravel",
+				"icon": "laravel"
+			},
+			{
+				"name": "Composer",
+				"icon": "composer"
+			}
+		]
+	},
+	"rust": {
+		"name": "Rust",
+		"icon": "rust",
+		"level": 40,
+		"tech": [
+			{
+				"name": "Actix Web",
+				"image": "../img/actix.png"
+			}
+		]
+	},
+	"cplusplus": {
+		"name": "C++",
+		"icon": "c-plusplus",
+		"level": 30,
+		"tech": [
+			{
+				"name": "ArduinoC",
+				"icon": "arduino"
+			}
+		]
+	},
+	"python": {
+		"name": "Python",
+		"icon": "python",
+		"level": 90,
+		"tech": [
+			{
+				"name": "Django",
+				"icon": "django"
+			}
+		]
+	},
+	"sql": {
+		"name": "SQL",
+		"icon": "sequelize",
+		"level": 90,
+		"tech": [
+			{
+				"name": "MySQL",
+				"icon": "mysql"
+			},
+			{
+				"name": "MariaDB",
+				"icon": "mariadb"
+			},
+			{
+				"name": "PostgreSQL",
+				"icon": "postgresql"
+			}
+		]
+	},
+	"html": {
+		"name": "HTML",
+		"icon": "html-5",
+		"level": 100
+	},
+	"css": {
+		"name": "CSS",
+		"icon": "css-3",
+		"level": 80,
+		"tech": [
+			{
+				"name": "Bootstrap",
+				"icon": "bootstrap"
+			},
+			{
+				"name": "BulmaCSS",
+				"icon": "bulma"
+			},
+			{
+				"name": "Material UI",
+				"icon": "material-ui"
+			},
+			{
+				"name": "SASS",
+				"icon": "sass"
+			},
+			{
+				"name": "PostCSS",
+				"icon": "postcss"
+			}
+		]
+	},
+	"sysadmin": {
+		"name": "DevOps",
+		"image": "../img/sysadmin.svg",
+		"level": 80,
+		"tech": [
+			{
+				"name": "Docker",
+				"icon": "docker"
+			},
+			{
+				"name": "NGINX",
+				"icon": "nginx"
+			},
+			{
+				"name": "GitHub Actions",
+				"icon": "github-actions"
+			},
+			{
+				"name": "Jenkins",
+				"icon": "jenkins"
+			}
+		]
+	}
+}

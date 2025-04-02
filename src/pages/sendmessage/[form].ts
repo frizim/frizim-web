@@ -1,0 +1,72 @@
+import * as https from "node:https";
+import type { APIRoute } from "astro";
+import { writeFile } from "node:fs/promises";
+import { randomUUID } from "node:crypto";
+import { z, ZodObject } from "astro:schema";
+import { PUSHOVER_APP, PUSHOVER_USER } from "../../config";
+
+const schemas = {
+    "legal": z.object({
+        email: z.string().regex(/\S+@\S{1,64}.\S{2,64}/),
+        message: z.string().min(10).max(2000),
+        "agree-privacy": z.string().regex(/(on)/)
+    }).strict()
+} as Record<string, ZodObject<any,any,any,any>>;
+
+const formRegex = /^[a-z-]{1,30}$/;
+
+export const prerender = false;
+
+export const POST: APIRoute = async (ctx) => {
+    if(!ctx.params.form || !formRegex.test(ctx.params.form)) {
+        return ctx.redirect("/404");
+    }
+
+    const schema = schemas[ctx.params.form ?? ""];
+    if(!schema) {
+        return ctx.redirect("/" + ctx.params.form);
+    }
+
+    let res;
+    try {
+        res = await schema.parseAsync(Object.fromEntries((await ctx.request.formData()).entries()));
+    } catch (err: unknown) {
+        console.log(err);
+        return ctx.redirect("/" + ctx.params.form);
+    }
+
+    res["created"] = new Date();
+
+    const messageId = randomUUID();
+
+    const params = `token=${PUSHOVER_APP}&user=${PUSHOVER_USER}&message=${encodeURIComponent("Neue Nachricht")}&url=${encodeURIComponent("https://" + ctx.url.host + "/admin/message/" + messageId)}`;
+
+    let output = "---\n";
+    for(const [key, val] of Object.entries(res)) {
+        if(key != "message")
+            output += key + ": \"" + val + "\"\n";
+    }
+    output += "---\n" + res.message;
+
+    await writeFile("messages/" + ctx.params.form + "/" + messageId + ".md", output, {
+        flag: "wx+"
+    });
+
+    const req = https.request({
+        method: "POST",
+        hostname: "api.pushover.net",
+        path: "/1/messages.json",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Length": params.length
+        }
+    }, res => {
+        res.on("data", (chunk: Buffer) => {
+            console.log(chunk.toString());
+        });
+    });
+    req.write(params);
+    req.end();
+
+    return ctx.redirect("/" + ctx.params.form);
+};

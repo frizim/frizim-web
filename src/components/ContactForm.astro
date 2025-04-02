@@ -1,0 +1,38 @@
+---
+import "bulma/sass/form/_index.scss";
+import "bulma/sass/elements/button.scss";
+
+interface FormField {
+    name: string;
+    label: string;
+    type?: "text" | "password" | "email";
+    minLength?: number;
+    maxLength: number;
+}
+
+const {origin} = Astro.props;
+---
+<form method="post" action={"/sendmessage" + origin} hx-boost hx-post={"/sendmessage" + origin}>
+    {Astro.props.fields.map((field: FormField) => (
+        <div class="field">
+            <label class="label" for={field.name}>{field.label}</label>
+            <input class="input" type={field.type ?? "text"} name={field.name} id={field.name} minlength={field.minLength ?? 1} maxlength={field.maxLength} required />
+        </div>))}
+    <div class="field">
+        <label class="label" for="message">Nachricht</label>
+        <textarea class="textarea" name="message" id="message" minlength="10" maxlength="2000" required></textarea>
+    </div>
+    <div class="field">
+        <div class="control">
+            <label class="checkbox" for="agree-privacy">
+                <input type="checkbox" name="agree-privacy" id="agree-privacy">
+                Ich stimme der Verarbeitung meiner Daten gemäß der <a href="/privacy">Datenschutzerklärung</a> zu.
+            </label>
+        </div>
+    </div>
+    <div class="field">
+        <div class="control">
+            <button class="button is-primary" type="submit">Nachricht senden</button>
+        </div>
+    </div>
+</form>
