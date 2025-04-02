@@ -7,7 +7,7 @@ const today = new Date();
 		<a class="navbar-item" href="/legal">Impressum</a>
 		<a class="navbar-item" href="/privacy">Datenschutz</a>
 	</nav>
-	<p>&copy; {today.getFullYear()} Friedrich Zimniak</p>
+	<p>&copy; {today.getFullYear()} Friedrich Zimniak <span>Generiert: {new Intl.DateTimeFormat("de-de", {dateStyle: "short", timeStyle: "medium", timeZone: "Europe/Berlin"}).format(today)}</span></p>
 </footer>
 <style lang="scss">
 	footer {
@@ -18,5 +18,9 @@ const today = new Date();
 	footer nav {
 		background-color: var(--bulma-primary-10);
 		color: var(--bulma-primary-50);
+	}
+
+	p > span {
+		float: right;
 	}
 </style>
