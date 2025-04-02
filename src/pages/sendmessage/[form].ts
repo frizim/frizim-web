@@ -3,7 +3,8 @@ import type { APIRoute } from "astro";
 import { writeFile } from "node:fs/promises";
 import { randomUUID } from "node:crypto";
 import { z, ZodObject } from "astro:schema";
-import { PUSHOVER_APP, PUSHOVER_USER } from "../../config";
+import { MESSAGES_DIR, PUSHOVER_APP, PUSHOVER_USER } from "../../config";
+import { existsSync, mkdirSync } from "node:fs";
 
 const schemas = {
     "legal": z.object({
@@ -48,7 +49,11 @@ export const POST: APIRoute = async (ctx) => {
     }
     output += "---\n" + res.message;
 
-    await writeFile("messages/" + ctx.params.form + "/" + messageId + ".md", output, {
+    if(!existsSync(MESSAGES_DIR + "/" + ctx.params.form)) {
+        mkdirSync(MESSAGES_DIR + "/" + ctx.params.form, {recursive: true});
+    }
+
+    await writeFile(MESSAGES_DIR + "/" + ctx.params.form + "/" + messageId + ".md", output, {
         flag: "wx+"
     });
 

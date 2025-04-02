@@ -1,5 +1,6 @@
 ---
 import FormattedDate from "../../../../components/FormattedDate.astro";
+import { MESSAGES_DIR } from "../../../../config";
 import Page from "../../../../layouts/Page.astro";
 
 export const prerender = false;
@@ -8,7 +9,7 @@ if(!Astro.params.id && !Astro.params.form) {
     return;
 }
 
-const message = await import("../../../../../messages/" + Astro.params.form + "/" + Astro.params.id + ".md");
+const message = await import(MESSAGES_DIR + "/" + Astro.params.form + "/" + Astro.params.id + ".md");
 ---
 <Page title="Nachricht">
     <p>ID: {message.id}</p>
