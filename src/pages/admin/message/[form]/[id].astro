@@ -2,20 +2,28 @@
 import FormattedDate from "../../../../components/FormattedDate.astro";
 import { MESSAGES_DIR } from "../../../../config";
 import Page from "../../../../layouts/Page.astro";
+import { readFile } from "node:fs/promises";
 
 export const prerender = false;
+
+interface Message {
+    id: string,
+    email: string,
+    created: Date,
+    message: string
+}
 
 if(!Astro.params.id && !Astro.params.form) {
     return;
 }
 
-const message = await import(MESSAGES_DIR + "/" + Astro.params.form + "/" + Astro.params.id + ".md");
+const message = JSON.parse((await readFile(MESSAGES_DIR + "/" + Astro.params.form + "/" + Astro.params.id + ".json")).toString()) as Message;
 ---
 <Page title="Nachricht">
     <p>ID: {message.id}</p>
-    <p>Von: {message.frontmatter.email}</p>
-    <p>Erstellt am: <FormattedDate date={new Date(message.frontmatter.created)}></p>
+    <p>Von: {message.email}</p>
+    <p>Erstellt am: <FormattedDate date={message.created}></p>
     <pre>
-        {message.compiledContent}
+        {message.message}
     </pre>
 </Page>

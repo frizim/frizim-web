@@ -15,6 +15,10 @@ const active = href ? href.replace(import.meta.env.BASE_URL, '') == Astro.url.pa
         user-select: none;
 	}
 
+    .navbar-item:hover {
+        background-color: inherit;
+    }
+
 	.navbar-item.is-selected {
 		background-color: inherit;
 	}

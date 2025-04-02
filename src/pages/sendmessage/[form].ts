@@ -25,7 +25,7 @@ export const POST: APIRoute = async (ctx) => {
 
     const schema = schemas[ctx.params.form ?? ""];
     if(!schema) {
-        return ctx.redirect("/" + ctx.params.form);
+        return ctx.redirect("/404");
     }
 
     let res;
@@ -42,18 +42,11 @@ export const POST: APIRoute = async (ctx) => {
 
     const params = `token=${PUSHOVER_APP}&user=${PUSHOVER_USER}&message=${encodeURIComponent("Neue Nachricht")}&url=${encodeURIComponent("https://" + ctx.url.host + "/admin/message/" + messageId)}`;
 
-    let output = "---\n";
-    for(const [key, val] of Object.entries(res)) {
-        if(key != "message")
-            output += key + ": \"" + val + "\"\n";
-    }
-    output += "---\n" + res.message;
-
     if(!existsSync(MESSAGES_DIR + "/" + ctx.params.form)) {
         mkdirSync(MESSAGES_DIR + "/" + ctx.params.form, {recursive: true});
     }
 
-    await writeFile(MESSAGES_DIR + "/" + ctx.params.form + "/" + messageId + ".md", output, {
+    await writeFile(MESSAGES_DIR + "/" + ctx.params.form + "/" + messageId + ".json", JSON.stringify(res), {
         flag: "wx+"
     });
 
