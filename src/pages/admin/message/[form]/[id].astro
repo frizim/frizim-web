@@ -9,7 +9,7 @@ export const prerender = false;
 interface Message {
     id: string,
     email: string,
-    created: Date,
+    created: string,
     message: string
 }
 
@@ -22,7 +22,7 @@ const message = JSON.parse((await readFile(MESSAGES_DIR + "/" + Astro.params.for
 <Page title="Nachricht">
     <p>ID: {message.id}</p>
     <p>Von: {message.email}</p>
-    <p>Erstellt am: <FormattedDate date={message.created}></p>
+    <p>Erstellt am: <FormattedDate date={new Date(message.created)}></p>
     <pre>
         {message.message}
     </pre>

@@ -36,11 +36,12 @@ export const POST: APIRoute = async (ctx) => {
         return ctx.redirect("/" + ctx.params.form);
     }
 
-    res["created"] = new Date();
-
     const messageId = randomUUID();
 
-    const params = `token=${PUSHOVER_APP}&user=${PUSHOVER_USER}&message=${encodeURIComponent("Neue Nachricht")}&url=${encodeURIComponent("https://" + ctx.url.host + "/admin/message/" + messageId)}`;
+    res["id"] = messageId;
+    res["created"] = new Date();
+
+    const params = `token=${PUSHOVER_APP}&user=${PUSHOVER_USER}&message=${encodeURIComponent("Neue Nachricht")}&url=${encodeURIComponent("https://" + ctx.url.host + "/admin/message/" + ctx.params.form + "/" + messageId)}`;
 
     if(!existsSync(MESSAGES_DIR + "/" + ctx.params.form)) {
         mkdirSync(MESSAGES_DIR + "/" + ctx.params.form, {recursive: true});
