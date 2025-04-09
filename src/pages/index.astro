@@ -3,12 +3,10 @@ import { SITE_DESCRIPTION } from '../config';
 import Page from '../layouts/Page.astro';
 import "bulma/sass/grid/grid.scss";
 import "bulma/sass/elements/progress.scss";
-import Skill from '../components/Skill.astro';
-import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
 import EmojiLi from '../components/EmojiLi.astro';
-type SkillEntry = CollectionEntry<"skill">;
-const skills = await getCollection("skill");
+import { Image } from 'astro:assets';
+import ferris from "../img/rustacean-flat-gesture.svg";
+import SkillGrid from '../components/SkillGrid.astro';
 ---
 <Page title="Über Mich" description={SITE_DESCRIPTION}>
 	<h1 class="title">Über Mich</h1>
@@ -20,43 +18,34 @@ const skills = await getCollection("skill");
 		<EmojiLi icon="🔐">Cybersecurity-Enthusiast mit Interesse an Security by Design und speichersicheren Sprachen</EmojiLi>
 	</ul>
 	<h2 class="subtitle">Fähigkeiten</h2>
-	<div class="skill-grid">
-		{skills.map((skill: SkillEntry) => (
-			<Skill skill={skill.data} />
-		))}
-	</div>
+	<SkillGrid />
+	<Image src={ferris} alt="" id="ferris" height={300} />
 </Page>
-<script>
-	let transition = 0;
-	const grid = document.querySelector(".skill-grid");
-
-	document.querySelectorAll(".skill-cell > input").forEach(el => {
-		grid?.classList.add("script-active");
-
-		el.addEventListener("change", (e) => {
-			if((e.target as HTMLInputElement).checked) {
-				el.parentElement?.classList.add("toggled");
-			}
-		});
-
-		el.parentElement?.addEventListener("transitionstart", (e: TransitionEvent) => {
-			if(e.target instanceof HTMLElement && e.target.classList.contains("toggled") && e.propertyName == "flex-basis") {
-				const targetEl = e.target as HTMLElement;
-				transition++;
-				if(transition > 1) {
-					setTimeout(() => targetEl.classList.remove("toggled"), 50);
-					transition = 0;
-				}
-			}
-		});
-	});
-</script>
-<style is:global>
+<style>
 	h2.subtitle {
 		margin-bottom: 4px !important;
 		margin-top: 1em !important;
 	}
 
+	#ferris {
+		position: fixed;
+		max-height: 20vh;
+		width: auto;
+		bottom: -100%;
+		right: -101%;
+		transform: rotate(-45deg);
+		z-index: 100;
+		transition-property: bottom, right;
+		transition-duration: 0.5s;
+	}
+
+	body:has(label[for=rust]:hover) #ferris, body:has(#rust:checked) #ferris {
+		bottom: 0;
+		right: -1%;
+		transform: rotate(-45deg) translate(0, 0);
+	}
+</style>
+<style is:global>
 	.skill-grid {
 		display: flex;
 		justify-content: space-around;
