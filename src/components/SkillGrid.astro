@@ -1,0 +1,37 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Skill from '../components/Skill.astro';
+
+type SkillEntry = CollectionEntry<"skill">;
+const skills = await getCollection("skill");
+---
+<div class="skill-grid">
+	{skills.map((skill: SkillEntry) => (
+		<Skill skill={skill.data} />
+	))}
+</div>
+<script>
+	let transition = 0;
+	const grid = document.querySelector(".skill-grid");
+
+	document.querySelectorAll(".skill-cell > input").forEach(el => {
+		grid?.classList.add("script-active");
+
+		el.addEventListener("change", (e) => {
+			if((e.target as HTMLInputElement).checked) {
+				el.parentElement?.classList.add("toggled");
+			}
+		});
+
+		el.parentElement?.addEventListener("transitionstart", (e: TransitionEvent) => {
+			if(e.target instanceof HTMLElement && e.target.classList.contains("toggled") && e.propertyName == "flex-basis") {
+				const targetEl = e.target as HTMLElement;
+				transition++;
+				if(transition > 1) {
+					setTimeout(() => targetEl.classList.remove("toggled"), 50);
+					transition = 0;
+				}
+			}
+		});
+	});
+</script>
