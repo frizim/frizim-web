@@ -1,0 +1,15 @@
+---
+const emoji = Astro.props.icon;
+---
+<li data-icon={emoji}><slot /></li>
+<style>
+    li {
+        list-style: none;
+        color: #dfdfdf;
+        margin-bottom: 8px;
+    }
+    li:before {
+        content: attr(data-icon);
+        margin-right: 4px;
+    }
+</style>

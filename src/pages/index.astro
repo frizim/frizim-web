@@ -1,17 +1,24 @@
 ---
-import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
+import { SITE_DESCRIPTION } from '../config';
 import Page from '../layouts/Page.astro';
 import "bulma/sass/grid/grid.scss";
 import "bulma/sass/elements/progress.scss";
 import Skill from '../components/Skill.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
+import EmojiLi from '../components/EmojiLi.astro';
 type SkillEntry = CollectionEntry<"skill">;
 const skills = await getCollection("skill");
 ---
-
-<Page title={SITE_TITLE} description={SITE_DESCRIPTION}>
+<Page title="Über Mich" description={SITE_DESCRIPTION}>
 	<h1 class="title">Über Mich</h1>
+	<ul>
+		<EmojiLi icon="🪪">26 Jahre alt, lebe in Deutschland</EmojiLi>
+		<EmojiLi icon="🗓️">Programmiere seit über 16 Jahren</EmojiLi>
+		<EmojiLi icon="🌐">Full-Stack-Webentwickler</EmojiLi>
+		<EmojiLi icon="🖥️">Desktop-Applikations-Entwickler</EmojiLi>
+		<EmojiLi icon="🔐">Cybersecurity-Enthusiast mit Interesse an Security by Design und speichersicheren Sprachen</EmojiLi>
+	</ul>
 	<h2 class="subtitle">Fähigkeiten</h2>
 	<div class="skill-grid">
 		{skills.map((skill: SkillEntry) => (
@@ -45,6 +52,11 @@ const skills = await getCollection("skill");
 	});
 </script>
 <style is:global>
+	h2.subtitle {
+		margin-bottom: 4px !important;
+		margin-top: 1em !important;
+	}
+
 	.skill-grid {
 		display: flex;
 		justify-content: space-around;
