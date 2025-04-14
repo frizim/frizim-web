@@ -1,0 +1,47 @@
+---
+import "bulma/sass/form/_index.scss";
+import "bulma/sass/elements/button.scss";
+import Page from "../../layouts/Page.astro";
+import { verify } from "argon2";
+import { ADMIN_PASSWORD } from "../../config";
+import { z } from "astro/zod";
+import { createSession } from "../../middleware";
+
+export const prerender = false;
+
+const schema = z.object({
+    password: z.string().min(8).max(500),
+    redir: z.string().regex(/\/admin\/[a-z/-]+/)
+}).strict();
+
+if(Astro.request.method === "POST") {
+    let res;
+    try {
+        res = await schema.parseAsync(Object.fromEntries((await Astro.request.formData()).entries()));
+    } catch (err: unknown) {
+        console.log(err);
+        return Astro.redirect("/admin/login?redir=" + redir);
+    }
+
+    if(await verify(ADMIN_PASSWORD, res.password)) {
+        Astro.cookies.set("admin-session", createSession());
+        return Astro.redirect("/admin/login?redir=" + redir);
+    }
+
+    return Astro.redirect("/admin/login");
+}
+---
+<Page title="Login">
+    <form method="post" action="/admin/login">
+        <div class="field">
+            <label class="label" for="password">Passwort</label>
+            <input class="input" type="password" name="password" id="password" minlength="8" maxlength="500" required autocomplete="current-password"></textarea>
+        </div>
+        <input type="hidden" name="redir" value={Astro.url.searchParams.get("redir")}>
+        <div class="field">
+            <div class="control">
+                <button class="button is-primary" type="submit">Anmelden</button>
+            </div>
+        </div>
+    </form>
+</Page>
