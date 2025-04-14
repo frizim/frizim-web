@@ -6,7 +6,11 @@ import "bulma/sass/elements/progress.scss";
 import EmojiLi from '../components/EmojiLi.astro';
 import { Image } from 'astro:assets';
 import ferris from "../img/rustacean-flat-gesture.svg";
-import SkillGrid from '../components/SkillGrid.astro';
+import Skill from '../components/Skill.astro';
+import { getCollection, type CollectionEntry } from "astro:content";
+
+type SkillEntry = CollectionEntry<"skill">;
+const skills = await getCollection("skill");
 ---
 <Page title="Über Mich" description={SITE_DESCRIPTION}>
 	<h1 class="title">Über Mich</h1>
@@ -14,13 +18,18 @@ import SkillGrid from '../components/SkillGrid.astro';
 		<EmojiLi icon="🪪">26 Jahre alt, lebe in Deutschland</EmojiLi>
 		<EmojiLi icon="🗓️">Programmiere seit über 16 Jahren</EmojiLi>
 		<EmojiLi icon="🌐">Full-Stack-Webentwickler</EmojiLi>
-		<EmojiLi icon="🖥️">Desktop-Applikations-Entwickler</EmojiLi>
+		<EmojiLi icon="🖥️">Desktop-App-Entwickler</EmojiLi>
 		<EmojiLi icon="🔐">Cybersecurity-Enthusiast mit Interesse an Security by Design und speichersicheren Sprachen</EmojiLi>
 	</ul>
 	<h2 class="subtitle">Fähigkeiten</h2>
-	<SkillGrid />
+	<div class="skill-grid">
+		{skills.map((skill: SkillEntry) => (
+			<Skill skill={skill.data} />
+		))}
+	</div>
 	<Image src={ferris} alt="" id="ferris" height={300} />
 </Page>
+<script src="../scripts/skill-grid.ts"></script>
 <style>
 	h2.subtitle {
 		margin-bottom: 4px !important;
@@ -44,8 +53,7 @@ import SkillGrid from '../components/SkillGrid.astro';
 		right: -1%;
 		transform: rotate(-45deg) translate(0, 0);
 	}
-</style>
-<style is:global>
+
 	.skill-grid {
 		display: flex;
 		justify-content: space-around;
@@ -57,7 +65,7 @@ import SkillGrid from '../components/SkillGrid.astro';
 		max-width: 600px;
 	}
 
-	.skill-grid:has(input:checked) .skill-cell:not(:has(> input:checked)), .skill-grid:has(.toggled) .skill-cell:not(:has(> input:checked)) {
+	.skill-grid:has(input:checked) :global(.skill-cell):not(:has(> input:checked)), .skill-grid:has(.toggled) :global(.skill-cell):not(:has(> input:checked)) {
 		padding: 0;
 		margin: 0;
 		height: 0;

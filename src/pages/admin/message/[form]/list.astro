@@ -12,7 +12,7 @@ if(!Astro.params.form || !regex.test(Astro.params.form)) {
 }
 
 const files = (await readdir(MESSAGES_DIR + "/" + Astro.params.form))
-    .filter((file: string) => file.endsWith(".md")).map((file: string) => file.split(".")[0]);
+    .filter((file: string) => file.endsWith(".json")).map((file: string) => file.split(".")[0]);
 ---
 <Page title="Nachrichten">
     {files.map((file: string) => (

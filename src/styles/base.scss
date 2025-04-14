@@ -1,0 +1,71 @@
+@use "@fontsource/material-symbols-sharp";
+@use "@fontsource/inter";
+
+@use "bulma/sass/utilities" with (
+    $scheme-h: 178,
+    $scheme-s: 85%,
+    $dark-l: 20%,
+    $light-l: 95%,
+    $family-sans-serif: "'Inter', sans-serif",
+    $family-primary: "'Inter', sans-serif",
+    $family-code: "'Hack', 'Roboto Mono', 'Source Code Pro', monospace"
+);
+
+@use "bulma/sass/base";
+@use "bulma/sass/components/navbar";
+@use "bulma/sass/elements/title";
+@use "bulma/sass/elements/icon";
+@use "bulma/sass/elements/content";
+@use "bulma/sass/layout/container";
+@use "bulma/sass/layout/footer";
+@use "bulma/sass/grid/columns";
+
+@use "bulma/sass/themes";
+
+:root {
+    --bulma-primary-h: 178deg;
+    --bulma-primary-s: 83%;
+    --bulma-primary-l: 45%;
+    --bulma-scheme-h: 178;
+    --bulma-scheme-s: 85%;
+    --bulma-light-l: 95%;
+    --bulma-dark-l: 20%;
+    --bulma-link: hsl(178deg, 100%, 80%);
+    --bulma-body-background-color: #0d0d0d;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: grid;
+    grid-template-rows: 1fr 0fr;
+}
+
+main.container {
+    margin: 0 auto;
+    padding-top: 1rem;
+}
+
+#main-nav {
+    flex-direction: column;
+}
+
+.main-navs .navbar {
+    display: flex;
+    background-color: transparent;
+}
+
+footer {
+    grid-row: 2 / 2;
+}
+
+i.icon {
+    font-family: "Material Symbols Sharp", sans-serif;
+    font-style: normal !important;
+}
+
+#contacts p {
+    align-items: flex-start;
+}

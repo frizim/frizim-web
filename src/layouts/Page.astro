@@ -2,12 +2,7 @@
 import Footer from '../components/Footer.astro';
 import Skeleton from './Skeleton.astro';
 
-import "bulma/sass/layout/container.scss";
-import "bulma/sass/grid/columns.scss";
-import "bulma/sass/components/card.scss";
-import "bulma/sass/components/navbar.scss";
-import "bulma/sass/elements/title.scss";
-import "bulma/sass/elements/icon.scss";
+import "../styles/base.scss";
 
 import BrandIcon from '../components/BrandIcon.astro';
 import NavLink from '../components/NavLink.astro';
@@ -35,6 +30,7 @@ const { title, description } = Astro.props;
 				<nav class="navbar is-text-centered is-justify-content-center">
 					<a class="navbar-item" href="https://github.com/frizim" aria-label="GitHub" target="_blank"><BrandIcon icon="github-icon" color="var(--bulma-navbar-item-color)" /></a>
 					<a class="navbar-item" href="https://keyoxide.frizim.com" aria-label="GPG-Keys"><BrandIcon icon="gnupg-icon" color="var(--bulma-navbar-item-color)" /></a>
+					<a class="navbar-item" href="https://www.linkedin.com/in/friedrich-z" aria-label="LinkedIn"><BrandIcon icon="linkedin-icon" color="var(--bulma-navbar-item-color)" /></a>
 				</nav>
 			</div>
 		</section>
@@ -44,27 +40,3 @@ const { title, description } = Astro.props;
 	</main>
 	<Footer />
 </Skeleton>
-<style is:global>
-	main.container {
-		margin: 0 auto;
-		padding-top: 1rem;
-	}
-
-	#main-nav {
-		flex-direction: column;
-	}
-
-	.main-navs .navbar {
-		display: flex;
-		background-color: transparent;
-	}
-
-	i.icon {
-		font-family: "Material Symbols Sharp";
-		font-style: normal !important;
-	}
-
-	#contacts p {
-		align-items: flex-start;
-	}
-</style>
