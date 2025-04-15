@@ -8,7 +8,7 @@ import "bulma/sass/grid/grid.scss";
 type Skill = CollectionEntry<'skill'>['data'];
 const skill = Astro.props.skill as Skill;
 ---
-<label class="skill-cell" for={skill.icon ?? skill.name}>
+<label class="skill-cell" for={skill.tech ? skill.icon ?? skill.name : undefined}>
     {skill.icon != undefined ? (<BrandIcon icon={skill.icon} />) : skill.image && (<Image src={skill.image} alt="" />)}
     <p>{skill.name}</p>
     <progress class="progress is-primary is-small" max="100" value={skill.level}></progress>
@@ -17,7 +17,7 @@ const skill = Astro.props.skill as Skill;
 <style>
     .skill-cell {
 		text-align: center;
-		background-color: var(--bulma-primary-20);
+		background-color: var(--bulma-primary-10);
 		border-radius: 1em;
 		padding: 1em 0.5em;
 		color: var(--bulma-primary-50);
