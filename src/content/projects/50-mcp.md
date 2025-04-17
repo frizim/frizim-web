@@ -1,5 +1,6 @@
 ---
 name: OpenSim Control Panel
+repo: https://github.com/frizim/os-control-panel
 state: archived
 icon: ../../img/mcp.png
 stack:
