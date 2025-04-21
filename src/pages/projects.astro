@@ -36,7 +36,7 @@ const LABELS = {
 
 const projects = await getCollection("project");
 ---
-<Page title="Projects" description={SITE_DESCRIPTION}>
+<Page title="Projekte" description={SITE_DESCRIPTION}>
     <div class="project-grid">
     {projects.sort((a, b) => a.id.localeCompare(b.id)).map((project: CollectionEntry<"project">) => {
         <div class="card">
