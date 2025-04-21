@@ -1,6 +1,6 @@
 ---
 const {href} = Astro.props;
-const active = href ? href.replace(import.meta.env.BASE_URL, '') == Astro.url.pathname.replace(import.meta.env.BASE_URL, '') : false;
+const active = href ? href == Astro.routePattern : false;
 ---
 {href ? 
     (<a class:list={["navbar-item", active && "is-selected"]} href={href}><slot/><span></span></a>) : 
