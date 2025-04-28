@@ -40,8 +40,8 @@ const skills = await getCollection("skill");
 		position: fixed;
 		max-height: 20vh;
 		width: auto;
-		bottom: -100%;
-		right: -101%;
+		bottom: -80vh;
+		right: -81vw;
 		transform: rotate(-45deg);
 		z-index: 100;
 		transition-property: bottom, right;
@@ -49,9 +49,8 @@ const skills = await getCollection("skill");
 	}
 
 	body:has(label[for=rust]:hover) #ferris, body:has(#rust:checked) #ferris {
-		bottom: -3%;
-		right: -5%;
-		transform: rotate(-45deg) translate(0, 0);
+		bottom: 0vh;
+		right: -2vw;
 	}
 
 	.skill-grid {

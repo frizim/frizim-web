@@ -1,0 +1,84 @@
+/*
+  Pure CSS star background, inspired by https://codepen.io/sarazond/pen/LYGbwj
+*/
+@use "sass:math";
+@use "sass:string";
+
+$star-color: rgba(200, 200, 200, 0.7);
+$light-up-color: rgba(255, 255, 255, 1);
+
+@function multiple-box-shadow($n) {
+    $value: '#{math.random(100)}vw #{math.random(100)}vh 1px';
+
+    @for $i from 2 through $n {
+        $value: '#{$value}, #{math.random(100)}vw #{math.random(100)}vh';
+    }
+
+    @return string.unquote($value);
+}
+
+.stars {
+    background: transparent;
+    animation: lightUp 60s linear infinite;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    color: $star-color;
+
+    &:after {
+        content: "";
+        position: absolute;
+        background: transparent;
+    }
+}
+
+@for $i from 1 through 3 {
+    #stars-#{$i} {
+        width: #{$i}px;
+        height: #{$i}px;
+        box-shadow: multiple-box-shadow((4 - $i) * 50);
+        border-radius: 50%;
+
+        &:after {
+            width: #{$i}px;
+            height: #{$i}px;
+        }
+    }
+}
+
+// Bigger screens get more stars
+@media screen and (min-width: 1000px) {
+    @for $i from 1 through 3 {
+        #stars-#{$i} {
+            box-shadow: multiple-box-shadow((4 - $i) * 200);
+        }
+    }
+}
+
+@keyframes lightUp {
+    0% {
+        color: $star-color;
+    }
+
+    60% {
+        color: $star-color;
+    }
+
+    61% {
+        color: $light-up-color;
+    }
+
+    70% {
+        color: $light-up-color;
+    }
+
+    71% {
+        color: $star-color;
+    }
+
+    100% {
+        color: $star-color;
+    }
+}

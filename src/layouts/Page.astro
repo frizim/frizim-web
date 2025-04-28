@@ -11,6 +11,11 @@ import NavDropdown from '../components/NavDropdown.astro';
 const { title, description } = Astro.props;
 ---
 <Skeleton title={title} description={description}>
+	<div>
+		<div class="stars" id="stars-1"></div>
+		<div class="stars" id="stars-2"></div>
+		<div class="stars" id="stars-3"></div>
+	</div>
 	<main class="container columns">
 		<section class="column is-one-third">
 			<h1 class="title">Friedrich Zimniak</h1>

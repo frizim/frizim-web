@@ -22,6 +22,8 @@
 
 @use "bulma/sass/themes";
 
+@use "stars.scss";
+
 :root {
     --bulma-primary-h: 178deg;
     --bulma-primary-s: 83%;
@@ -35,12 +37,14 @@
 }
 
 html, body {
-    height: 100%;
+    min-height: 100vh;
 }
 
 body {
     display: grid;
-    grid-template-rows: 1fr 0fr;
+    grid-template-rows: 0fr 1fr 0fr;
+    background: radial-gradient(ellipse at bottom, #1d1d2d 0%, #0d0d0d 100%);
+    background-attachment: fixed;
 }
 
 main.container {
@@ -58,7 +62,7 @@ main.container {
 }
 
 footer {
-    grid-row: 2 / 2;
+    grid-row: 3 / 3;
 }
 
 i.icon {
