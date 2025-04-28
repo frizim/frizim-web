@@ -20,7 +20,7 @@ const project = defineCollection({
 	loader: glob({base: "./src/content/projects", pattern: "*.md"}),
 	schema: ({image}) => z.object({
 		name: z.string(),
-		state: z.enum(["idea", "planning", "wip", "active", "archived"]),
+		state: z.enum(["idea", "planning", "wip", "alpha", "beta", "release", "archived"]),
 		repo: z.string().optional(),
 		icon: image(),
 		stack: z.array(z.object({

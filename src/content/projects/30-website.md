@@ -1,7 +1,7 @@
 ---
 name: Diese Website
 repo: https://github.com/frizim/frizim-web
-state: active
+state: release
 icon: ../../img/website.svg
 stack:
   - name: JavaScript

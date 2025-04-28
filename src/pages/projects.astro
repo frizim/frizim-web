@@ -10,6 +10,7 @@ import {Image} from "astro:assets";
 import "bulma/sass/components/card.scss";
 import "bulma/sass/elements/tag.scss";
 import "bulma/sass/grid/_index.scss";
+import { data } from 'autoprefixer';
 
 const LABELS = {
     "idea": {
@@ -18,14 +19,22 @@ const LABELS = {
     },
     "planning": {
         name: "In Planung",
-        class: "is-warning"
+        class: "is-info"
     },
     "wip": {
         name: "In Arbeit",
+        class: "is-danger"
+    },
+    "alpha": {
+        name: "Alpha",
+        class: "is-warning"
+    },
+    "beta": {
+        name: "Beta",
         class: "is-info"
     },
-    "active": {
-        name: "Aktiv",
+    "release": {
+        name: "Release",
         class: "is-success"
     },
     "archived": {
@@ -41,16 +50,16 @@ const projects = await getCollection("project");
     {projects.sort((a, b) => a.id.localeCompare(b.id)).map((project: CollectionEntry<"project">) => {
         <div class="card">
             <div class="card-header">
-                <p class="card-header-icon p-0 m-2 is-small"><Image src={project.data.icon} height="64" alt=""/></p>
+                <p class="card-header-icon p-0 m-2 is-small"><Image src={project.data.icon} width="64" alt=""/></p>
                 <h1 class="card-header-title title is-4">{project.data.name}</h1>
                 <p class:list={["tag is-medium m-2", LABELS[project.data.state].class]}>{LABELS[project.data.state].name}</p>
             </div>
             <div class="card-content">
                 {project.body}
             </div>
-            <footer class="card-footer navbar">
+            {project.data.repo && (<footer class="card-footer navbar">
                 <a href={project.data.repo} target="_blank" class="navbar-item card-footer-item"><BrandIcon icon="github-icon" />Repository</a>
-            </footer>
+            </footer>)}
         </div>
     })}
     </div>
@@ -99,13 +108,19 @@ const projects = await getCollection("project");
         display: block;
     }
 
+    .card-header img {
+        min-width: 64px;
+        width: 64px;
+    }
+
     .card-header > .tag {
         border-bottom-right-radius: 0;
         border-top-left-radius: 0;
     }
 
     footer.card-footer a {
-        background-clip: content-box;
+        border-bottom-left-radius: var(--bulma-card-radius);
+        border-bottom-right-radius: var(--bulma-card-radius);
         width: 100%;
         display: flex;
     }

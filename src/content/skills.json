@@ -121,7 +121,7 @@
 	"python": {
 		"name": "Python",
 		"icon": "python",
-		"level": 90,
+		"level": 80,
 		"tech": [
 			{
 				"name": "Django",
