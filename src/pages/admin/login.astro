@@ -20,12 +20,12 @@ if(Astro.request.method === "POST") {
         res = await schema.parseAsync(Object.fromEntries((await Astro.request.formData()).entries()));
     } catch (err: unknown) {
         console.log(err);
-        return Astro.redirect("/admin/login?redir=" + redir);
+        return Astro.redirect("/");
     }
 
     if(await verify(ADMIN_PASSWORD, res.password)) {
         Astro.cookies.set("admin-session", createSession());
-        return Astro.redirect("/admin/login?redir=" + redir);
+        return Astro.redirect("/admin/login?redir=" + res.redir);
     }
 
     return Astro.redirect("/admin/login");
