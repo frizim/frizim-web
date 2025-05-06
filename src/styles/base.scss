@@ -24,7 +24,11 @@
 
 @use "stars.scss";
 
-:root {
+html, body {
+    min-height: 100vh;
+}
+
+body {
     --bulma-primary-h: 178deg;
     --bulma-primary-s: 83%;
     --bulma-primary-l: 45%;
@@ -34,16 +38,12 @@
     --bulma-dark-l: 20%;
     --bulma-link: hsl(178deg, 100%, 80%);
     --bulma-body-background-color: #0d0d0d;
-}
+    --bulma-hover-25: hsl(var(--bulma-primary-h), var(--bulma-primary-s), calc(var(--bulma-primary-30-l)));
 
-html, body {
-    min-height: 100vh;
-}
-
-body {
     display: grid;
     grid-template-rows: 0fr 1fr 0fr;
     background: radial-gradient(ellipse at bottom, #1d1d2d 0%, #0d0d0d 100%);
+    background-color: var(--bulma-body-background-color);
     background-attachment: fixed;
 }
 

@@ -17,6 +17,42 @@ $light-up-color: rgba(255, 255, 255, 1);
     @return string.unquote($value);
 }
 
+body {
+    transition: background 0.5s;
+}
+
+body:has(.toggle-switch-chk:not(:checked)) {
+    background: #0d0d0d;
+}
+
+.toggle-switch {
+    background-color: var(--bulma-primary-10);
+    border-radius: 50%;
+    padding: 2px;
+    color: #fff;
+    position: fixed;
+    top: 1em;
+    right: 1em;
+    z-index: 10;
+}
+
+.toggle-switch-chk {
+    display: none;
+}
+
+.star-container {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+input:checked + .toggle-switch {
+    background-color: var(--bulma-hover-25);
+}
+
+input:checked + label + .star-container {
+    opacity: 1;
+}
+
 .stars {
     background: transparent;
     animation: lightUp 60s linear infinite;

@@ -11,7 +11,9 @@ import NavDropdown from '../components/NavDropdown.astro';
 const { title, description } = Astro.props;
 ---
 <Skeleton title={title} description={description}>
-	<div>
+	<input class="toggle-switch-chk" name="toggle-stars" id="toggle-stars" type="checkbox" checked="checked">
+	<label class="toggle-switch" for="toggle-stars" aria-label="Sterne ein/ausschalten"><i class="icon">moon_stars</i></label>
+	<div class="star-container">
 		<div class="stars" id="stars-1"></div>
 		<div class="stars" id="stars-2"></div>
 		<div class="stars" id="stars-3"></div>
