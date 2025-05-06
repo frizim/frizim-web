@@ -36,16 +36,17 @@ const skill = Astro.props.skill as Skill;
 	}
 
 	.skill-cell:hover {
-		background-color: hsl(var(--bulma-primary-h), var(--bulma-primary-s), calc(var(--bulma-primary-30-l)));
+		background-color: var(--bulma-hover-25);
 	}
 
 	.skill-cell:has(> input:checked) {
-        background-color: var(--bulma-primary-25);
+        background-color: var(--bulma-hover-25);
 		flex-basis: 100%;
 		max-width: 100%;
     }
 
 	.progress {
+		display: block;
 		height: 0.25em;
 		margin: 0.2em 0;
 		background-color: var(--bulma-primary-05);
