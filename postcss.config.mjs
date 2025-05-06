@@ -3,7 +3,7 @@ import autoprefixer from "autoprefixer";
 
 export default {
     plugins: [
-        cssnano,
-        autoprefixer
+        cssnano(),
+        autoprefixer()
     ]
 };

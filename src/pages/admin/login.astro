@@ -11,7 +11,7 @@ export const prerender = false;
 
 const schema = z.object({
     password: z.string().min(8).max(500),
-    redir: z.string().regex(/\/admin\/[a-z/-]+/)
+    redir: z.string().regex(/\/admin\/[a-z/-]+/).optional()
 }).strict();
 
 if(Astro.request.method === "POST") {
@@ -25,10 +25,10 @@ if(Astro.request.method === "POST") {
 
     if(await verify(ADMIN_PASSWORD, res.password)) {
         Astro.cookies.set("admin-session", createSession());
-        return Astro.redirect("/admin/login?redir=" + res.redir);
+        return Astro.redirect(res.redir ?? "/");
     }
 
-    return Astro.redirect("/admin/login");
+    return Astro.redirect("/admin/login" + (res.redir ? "?redir=" + res.redir : ""));
 }
 ---
 <Page title="Login">
