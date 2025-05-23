@@ -24,7 +24,6 @@ const skill = Astro.props.skill as Skill;
 		font-weight: bold;
 		flex-basis: 20%;
 		flex-grow: 1;
-		aspect-ratio: 1 / 1;
 		transition: all 0.5s;
 		margin-bottom: 1.5rem;
 		user-select: none;
@@ -32,6 +31,7 @@ const skill = Astro.props.skill as Skill;
 	}
 
 	.skill-cell > img, .skill-cell > svg {
+		height: 50%;
 		max-height: 4em;
 	}
 
@@ -43,6 +43,7 @@ const skill = Astro.props.skill as Skill;
         background-color: var(--bulma-hover-25);
 		flex-basis: 100%;
 		max-width: 100%;
+		aspect-ratio: 1 / 1;
     }
 
 	.progress {
