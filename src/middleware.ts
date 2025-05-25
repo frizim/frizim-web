@@ -1,5 +1,6 @@
 import { defineMiddleware } from "astro:middleware";
 import {createHash, randomBytes} from "node:crypto";
+import { ADMIN_SESSION_DURATION } from "./config";
 
 interface Session {
     tokenHash: string;
@@ -38,7 +39,7 @@ export function createSession(): string {
     const tokenHash = createHash("sha512").update(token).digest("hex");
     sessions.set(tokenHash, {
         tokenHash: tokenHash,
-        expiry: Date.now() + 3600
+        expiry: Date.now() + ADMIN_SESSION_DURATION
     });
     return token;
 }
