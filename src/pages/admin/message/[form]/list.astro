@@ -1,7 +1,12 @@
 ---
 import {readdir} from "node:fs/promises";
+import fs from 'node:fs';
+
 import Page from "../../../../layouts/Page.astro";
+import FormattedDate from "../../../../components/FormattedDate.astro";
 import { MESSAGES_DIR } from "../../../../config";
+
+import "bulma/sass/elements/table.scss";
 
 export const prerender = false;
 const regex = /^[a-z-]{1,20}$/;
@@ -11,11 +16,34 @@ if(!Astro.params.form || !regex.test(Astro.params.form)) {
     return;
 }
 
+interface Message {
+    id: string,
+    email: string,
+    created: string
+}
+
 const files = (await readdir(MESSAGES_DIR + "/" + Astro.params.form))
-    .filter((file: string) => file.endsWith(".json")).map((file: string) => file.split(".")[0]);
+    .filter((file: string) => file.endsWith(".json"))
+    .map((file: string) => JSON.parse(fs.readFileSync(MESSAGES_DIR + "/" +  Astro.params.form + "/" + file).toString()) as Message);
 ---
 <Page title="Nachrichten">
-    {files.map((file: string) => (
-        <a href={"/admin/message/" + Astro.params.form + "/" + file}>{file}</a>
-    ))}
+    <h1 class="title">Nachrichten: {Astro.params.form}</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>E-Mail</th>
+                <th>Datum</th>
+            </tr>
+        </thead>
+        <tbody>
+            {files.map((msg: Message) => (
+                <tr>
+                    <td><a href={"/admin/message/" + Astro.params.form + "/" + msg.id}>{msg.id}</a></td>
+                    <td>{msg.email}</td>
+                    <td><FormattedDate date={new Date(msg.created)} /></td>
+                </tr>
+            ))}
+        </tbody>
+    </table>
 </Page>

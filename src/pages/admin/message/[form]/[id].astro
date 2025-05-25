@@ -3,6 +3,8 @@ import FormattedDate from "../../../../components/FormattedDate.astro";
 import { MESSAGES_DIR } from "../../../../config";
 import Page from "../../../../layouts/Page.astro";
 import { readFile } from "node:fs/promises";
+import "bulma/sass/components/card.scss";
+import "bulma/sass/elements/button.scss";
 
 export const prerender = false;
 
@@ -20,10 +22,33 @@ if(!Astro.params.id && !Astro.params.form) {
 const message = JSON.parse((await readFile(MESSAGES_DIR + "/" + Astro.params.form + "/" + Astro.params.id + ".json")).toString()) as Message;
 ---
 <Page title="Nachricht">
-    <p>ID: {message.id}</p>
-    <p>Von: {message.email}</p>
-    <p>Erstellt am: <FormattedDate date={new Date(message.created)}></p>
-    <pre>
-        {message.message}
-    </pre>
+    <a class="button is-primary" href={"/admin/message/" + Astro.params.form + "/list"}>Zurück</a>
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-header-title">Von {message.email}</h1>
+            <p>ID: {message.id}</p>
+            <p>Erstellt am: <FormattedDate date={new Date(message.created)}></p>
+        </div>
+        <pre class="card-content">{message.message}</pre>
+    </div>
 </Page>
+<style>
+    .card {
+        max-width: 90%;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-header {
+        border-bottom: 1px solid var(--bulma-link);
+        flex-direction: column;
+    }
+
+    .card-header p {
+        padding-left: 1rem;
+    }
+
+    .card-content {
+        background-color: var(--bullma)
+    }
+</style>
