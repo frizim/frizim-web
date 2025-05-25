@@ -7,6 +7,7 @@ import FormattedDate from "../../../../components/FormattedDate.astro";
 import { MESSAGES_DIR } from "../../../../config";
 
 import "bulma/sass/elements/table.scss";
+import "bulma/sass/elements/button.scss";
 
 export const prerender = false;
 const regex = /^[a-z-]{1,20}$/;
@@ -34,6 +35,7 @@ const files = (await readdir(MESSAGES_DIR + "/" + Astro.params.form))
                 <th>ID</th>
                 <th>E-Mail</th>
                 <th>Datum</th>
+                <th>Aktionen</th>
             </tr>
         </thead>
         <tbody>
@@ -42,6 +44,12 @@ const files = (await readdir(MESSAGES_DIR + "/" + Astro.params.form))
                     <td><a href={"/admin/message/" + Astro.params.form + "/" + msg.id}>{msg.id}</a></td>
                     <td>{msg.email}</td>
                     <td><FormattedDate date={new Date(msg.created)} /></td>
+                    <td>
+                        <form method="post" action={"/admin/message/" + Astro.params.form + "/delete"}>
+                            <input type="hidden" name="messageId" value={msg.id}>
+                            <button type="submit" class="button is-danger is-rounded"><i class="icon">delete</i></button>
+                        </form>
+                    </td>
                 </tr>
             ))}
         </tbody>
