@@ -3,7 +3,7 @@ import type { APIRoute } from "astro";
 import { writeFile } from "node:fs/promises";
 import { randomUUID } from "node:crypto";
 import { z, ZodObject } from "astro:schema";
-import { MESSAGES_DIR, PUSHOVER_APP, PUSHOVER_USER } from "../../config";
+import { MESSAGES_DIR, MESSAGES_SENDER_BLACKLIST, PUSHOVER_APP, PUSHOVER_USER } from "../../config";
 import { existsSync, mkdirSync } from "node:fs";
 
 const schemas = {
@@ -36,12 +36,17 @@ export const POST: APIRoute = async (ctx) => {
         return ctx.redirect("/" + ctx.params.form);
     }
 
+    for(const emailRegex of MESSAGES_SENDER_BLACKLIST) {
+        if(emailRegex.test(res["email"])) {
+            console.log("Blacklisted sender " + res["email"] + " tried to send a message of type " + ctx.params.form);
+            return ctx.redirect("/" + ctx.params.form);
+        }
+    }
+
     const messageId = randomUUID();
 
     res["id"] = messageId;
     res["created"] = new Date();
-
-    const params = `token=${PUSHOVER_APP}&user=${PUSHOVER_USER}&message=${encodeURIComponent("Neue Nachricht")}&url=${encodeURIComponent("https://" + ctx.url.host + "/admin/message/" + ctx.params.form + "/" + messageId)}`;
 
     if(!existsSync(MESSAGES_DIR + "/" + ctx.params.form)) {
         mkdirSync(MESSAGES_DIR + "/" + ctx.params.form, {recursive: true});
@@ -51,6 +56,7 @@ export const POST: APIRoute = async (ctx) => {
         flag: "wx+"
     });
 
+    const params = `token=${PUSHOVER_APP}&user=${PUSHOVER_USER}&message=${encodeURIComponent("Neue Nachricht")}&url=${encodeURIComponent("https://" + ctx.url.host + "/admin/message/" + ctx.params.form + "/" + messageId)}`;
     const req = https.request({
         method: "POST",
         hostname: "api.pushover.net",
