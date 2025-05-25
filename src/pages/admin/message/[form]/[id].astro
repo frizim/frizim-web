@@ -34,7 +34,6 @@ const message = JSON.parse((await readFile(MESSAGES_DIR + "/" + Astro.params.for
 </Page>
 <style>
     .card {
-        max-width: 90%;
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
     }
@@ -49,6 +48,6 @@ const message = JSON.parse((await readFile(MESSAGES_DIR + "/" + Astro.params.for
     }
 
     .card-content {
-        background-color: var(--bullma)
+        white-space: pre-wrap;
     }
 </style>
