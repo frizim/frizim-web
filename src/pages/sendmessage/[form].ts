@@ -3,7 +3,7 @@ import type { APIRoute } from "astro";
 import { writeFile } from "node:fs/promises";
 import { randomUUID } from "node:crypto";
 import { z, ZodObject } from "astro:schema";
-import { MESSAGES_DIR, MESSAGES_SENDER_BLACKLIST, PUSHOVER_APP, PUSHOVER_USER } from "../../config";
+import { MESSAGES_DIR, MESSAGES_SENDER_BLACKLIST, MESSAGES_CONTENT_BLACKLIST, PUSHOVER_APP, PUSHOVER_USER } from "../../config";
 import { existsSync, mkdirSync } from "node:fs";
 
 const schemas = {
@@ -39,6 +39,13 @@ export const POST: APIRoute = async (ctx) => {
     for(const emailRegex of MESSAGES_SENDER_BLACKLIST) {
         if(emailRegex.test(res["email"])) {
             console.log("Blacklisted sender " + res["email"] + " tried to send a message of type " + ctx.params.form);
+            return ctx.redirect("/" + ctx.params.form);
+        }
+    }
+
+    for(const contentRegex of MESSAGES_CONTENT_BLACKLIST) {
+        if(contentRegex.test(res["message"])) {
+            console.log("Message contents submitted to " + ctx.params.form + " match blacklist regex " + contentRegex);
             return ctx.redirect("/" + ctx.params.form);
         }
     }
