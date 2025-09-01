@@ -16,11 +16,12 @@
     "@fontsource/inter": "^5.2.5",
     "@fontsource/material-symbols-sharp": "^5.2.5",
     "@iconify-json/logos": "^1.2.4",
-    "argon2": "^0.43.0",
+    "argon2": "^0.44.0",
     "astro": "^5.4.2",
     "bulma": "^1.0.3",
     "fastify": "^5.2.2",
-    "htmx.org": "^2.0.4"
+    "htmx.org": "^2.0.4",
+    "unstorage": "^1.15.0"
   },
   "devDependencies": {
     "@astrojs/mdx": "^4.1.0",
