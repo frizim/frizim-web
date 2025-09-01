@@ -14,5 +14,5 @@ export const POST: APIRoute = async (ctx) => {
         unlinkSync(path);
     }
 
-    return ctx.redirect("/admin/messages/" + ctx.params.form + "/list");
+    return ctx.redirect("/admin/message/" + ctx.params.form + "/list");
 };

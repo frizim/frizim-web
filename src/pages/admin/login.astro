@@ -24,7 +24,12 @@ if(Astro.request.method === "POST") {
     }
 
     if(await verify(ADMIN_PASSWORD, res.password)) {
-        Astro.cookies.set("admin-session", createSession());
+        Astro.cookies.set("admin-session", createSession(), {
+            secure: true,
+            httpOnly: true,
+            path: '/',
+            sameSite: "strict"
+        });
         return Astro.redirect(res.redir ?? "/");
     }
 
