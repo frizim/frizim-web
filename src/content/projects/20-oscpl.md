@@ -2,7 +2,7 @@
 name: OpenSim Control Panel
 repo: https://github.com/frizim/os-control-panel
 state: beta
-icon: ../../img/mcp.png
+icon: ../../img/oscpl.png
 stack:
   - name: PHP
     icon: php

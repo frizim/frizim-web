@@ -91,6 +91,14 @@
 				"icon": "laravel"
 			},
 			{
+				"name": "Symfony",
+				"icon": "symfony"
+			},
+			{
+				"name": "Codeception",
+				"icon": "codeception"
+			},
+			{
 				"name": "Composer",
 				"icon": "composer"
 			}
@@ -163,12 +171,16 @@
 				"icon": "bootstrap"
 			},
 			{
-				"name": "BulmaCSS",
-				"icon": "bulma"
-			},
-			{
 				"name": "Material UI",
 				"icon": "material-ui"
+			},
+			{
+				"name": "UIKit",
+				"icon": "uikit"
+			},
+			{
+				"name": "BulmaCSS",
+				"icon": "bulma"
 			},
 			{
 				"name": "SASS",
@@ -188,6 +200,10 @@
 			{
 				"name": "Docker",
 				"icon": "docker"
+			},
+			{
+				"name": "Kubernetes",
+				"icon": "kubernetes"
 			},
 			{
 				"name": "NGINX",
