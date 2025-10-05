@@ -1,8 +1,6 @@
 ---
 import { SITE_DESCRIPTION } from '../config';
 import Page from '../layouts/Page.astro';
-import "bulma/sass/grid/grid.scss";
-import "bulma/sass/elements/progress.scss";
 import EmojiLi from '../components/EmojiLi.astro';
 import { Image } from 'astro:assets';
 import ferris from "../img/rustacean-flat-gesture.svg";
@@ -34,6 +32,10 @@ const skills = await getCollection("skill");
 	h2.subtitle {
 		margin-bottom: 4px !important;
 		margin-top: 1em !important;
+	}
+
+	ul {
+		padding-left: 12px;
 	}
 
 	#ferris {

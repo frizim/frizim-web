@@ -8,12 +8,18 @@ const active = href ? href == Astro.routePattern : false;
 }
 <style>
     .navbar-item {
+        position: relative;
 		display: flex;
-        padding-left: 0;
-        padding-right: 0;
+        padding: 0.5rem 0;
         width: 100%;
         user-select: none;
+        color: var(--primary-text);
+        line-height: 1.5;
 	}
+
+    .navbar-item > svg {
+        max-height: 1.75rem;
+    }
 
     .navbar-item:hover {
         background-color: inherit;
@@ -25,7 +31,7 @@ const active = href ? href == Astro.routePattern : false;
 
     .navbar-item span {
         width: 0;
-        border-bottom: 2px solid hsl(var(--bulma-primary-h), var(--bulma-primary-s), calc(var(--bulma-primary-30-l)));
+        border-bottom: 2px solid hsl(178deg, 83%, 31%);
         transition: width 0.5s;
         position: absolute;
         bottom: 0;

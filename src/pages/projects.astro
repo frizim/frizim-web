@@ -5,12 +5,7 @@ import type { CollectionEntry } from 'astro:content';
 import { SITE_DESCRIPTION } from '../config';
 import Page from '../layouts/Page.astro';
 import BrandIcon from '../components/BrandIcon.astro';
-import {Image} from "astro:assets";
-
-import "bulma/sass/components/card.scss";
-import "bulma/sass/elements/tag.scss";
-import "bulma/sass/grid/_index.scss";
-import { data } from 'autoprefixer';
+import Card from '../components/Card.astro';
 
 const LABELS = {
     "idea": {
@@ -46,21 +41,13 @@ const LABELS = {
 const projects = await getCollection("project");
 ---
 <Page title="Projekte" description={SITE_DESCRIPTION}>
-    <div class="project-grid">
+    <div class="project-grid pure-g">
     {projects.sort((a, b) => a.id.localeCompare(b.id)).map((project: CollectionEntry<"project">) => {
-        <div class="card">
-            <div class="card-header">
-                <p class="card-header-icon p-0 m-2 is-small"><Image src={project.data.icon} width="64" alt=""/></p>
-                <h1 class="card-header-title title is-4">{project.data.name}</h1>
-                <p class:list={["tag is-medium m-2", LABELS[project.data.state].class]}>{LABELS[project.data.state].name}</p>
-            </div>
-            <div class="card-content">
-                {project.body}
-            </div>
-            {project.data.repo && (<footer class="card-footer navbar">
-                <a href={project.data.repo} target="_blank" class="navbar-item card-footer-item"><BrandIcon icon="github-icon" />Repository</a>
-            </footer>)}
-        </div>
+        <Card classes="pure-u-1 pure-u-md-1-2" icon={project.data.icon} title={project.data.name} enableFooter>
+            <p slot="header" class:list={["tag", LABELS[project.data.state].class]}>{LABELS[project.data.state].name}</p>
+            {project.body}
+            <a slot="footer" href={project.data.repo} target="_blank" class="navbar-item card-footer-item"><BrandIcon icon="github-icon" color="var(--navbar-item-color)" /><span>Repository</span></a>
+        </Card>
     })}
     </div>
 </Page>
@@ -69,59 +56,38 @@ const projects = await getCollection("project");
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
-        gap: 1rem;
     }
 
-    .project-grid .card {
-        display: grid;
-        grid-template-rows: 0fr 1fr 0fr;
-        flex: 1 1 40%;
-        margin-bottom: 0;
-    }
-
-    .project-grid .card-header {
-        grid-row: 1 / 1;
-        text-wrap: wrap;
-    }
-
-    .project-grid .card-content {
-        grid-row: 2 / 2;
-        text-wrap: wrap;
-    }
-
-    .project-grid .card-footer {
-        grid-row: 3 / 3;
-    }
-
-    .stack {
-
-        input {
-            display: none;
-        }
-    }
-
-    .collapsible {
-        display: none;
-    }
-
-    .stack input:checked + .collapsible {
-        display: block;
-    }
-
-    .card-header img {
-        min-width: 64px;
-        width: 64px;
-    }
-
-    .card-header > .tag {
-        border-bottom-right-radius: 0;
+    .tag {
+        margin-left: auto;
+        margin-top: 0;
+        border-radius: var(--card-radius);
+        display: inline-flex;
+        height: 2em;
+        justify-content: center;
+        line-height: 200%;
+        padding-left: 0.75em;
+        padding-right: 0.75em;
+        white-space: nowrap;
         border-top-left-radius: 0;
+        border-bottom-right-radius: 0;
+        color: #000;
     }
 
-    footer.card-footer a {
-        border-bottom-left-radius: var(--bulma-card-radius);
-        border-bottom-right-radius: var(--bulma-card-radius);
-        width: 100%;
+    .tag.is-danger {
+        background-color: hsl(347.8, 100%, 70%);
+    }
+
+    .tag.is-info {
+        background-color: hsl(198deg, 100%, 70%);
+    }
+
+    .tag.is-success {
+        background-color: hsl(153deg, 53%, 53%);
+    }
+
+    .card-footer-item {
         display: flex;
+        align-items: center;
     }
 </style>

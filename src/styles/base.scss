@@ -1,55 +1,70 @@
 @use "@fontsource/material-symbols-sharp";
-@use "@fontsource/inter";
-
-@use "bulma/sass/utilities" with (
-    $scheme-h: 178,
-    $scheme-s: 85%,
-    $dark-l: 20%,
-    $light-l: 95%,
-    $family-sans-serif: "'Inter', sans-serif",
-    $family-primary: "'Inter', sans-serif",
-    $family-code: "'Hack', 'Roboto Mono', 'Source Code Pro', monospace"
-);
-
-@use "bulma/sass/base";
-@use "bulma/sass/components/navbar";
-@use "bulma/sass/elements/title";
-@use "bulma/sass/elements/icon";
-@use "bulma/sass/elements/content";
-@use "bulma/sass/layout/container";
-@use "bulma/sass/layout/footer";
-@use "bulma/sass/grid/columns";
-
-@use "bulma/sass/themes";
-
+@use "@fontsource/inconsolata";
+@use "purecss/build/pure-min.css";
+@use "purecss/build/grids-responsive-min.css";
 @use "stars.scss";
 
 html, body {
     min-height: 100vh;
 }
 
-body {
-    --bulma-primary-h: 178deg;
-    --bulma-primary-s: 83%;
-    --bulma-primary-l: 45%;
-    --bulma-scheme-h: 178;
-    --bulma-scheme-s: 85%;
-    --bulma-light-l: 95%;
-    --bulma-dark-l: 20%;
-    --bulma-link: hsl(178deg, 100%, 80%);
-    --bulma-body-background-color: #0d0d0d;
-    --bulma-hover-25: hsl(var(--bulma-primary-h), var(--bulma-primary-s), calc(var(--bulma-primary-30-l)));
+:root {
+    --primary-dark: hsla(171deg, 100%, 6%, 1);
+    --primary-background-medium: hsl(178deg, 85%, 9%);
+    --primary-background: hsla(171deg, 100%, 11%, 1);
+    --primary-text: hsla(171deg, 100%, 51%, 1);
+    --primary-text-hover: hsla(171deg, 100%, 81%, 1);
+    --primary-background-hover: hsl(178deg,83%,21%);
+    --primary-border: hsl(178,85%,21%);
+    --text: rgb(223, 223, 223);
+    --navbar-item-color: var(--primary-text);
+    --animation-standard: 0.3s;
 
+    --card-radius: 0.75rem;
+}
+
+body {
     display: grid;
     grid-template-rows: 0fr 1fr 0fr;
     background: radial-gradient(ellipse at bottom, #1d1d2d 0%, #0d0d0d 100%);
-    background-color: var(--bulma-body-background-color);
+    background-color: #0d0d0d;
     background-attachment: fixed;
+    color: var(--text);
+    font-family: 'Inconsolata', monospace;
+    font-size: 16px;
+}
+
+a, a:visited {
+    text-decoration: none;
+    color: var(--primary-text);
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--primary-text-hover);
+}
+
+a svg path {
+    transition: fill 0.3s;
+}
+
+a:hover svg path {
+    fill: var(--primary-text-hover);
 }
 
 main.container {
+    width: 100%;
+    max-width: 1344px;
     margin: 0 auto;
     padding-top: 1rem;
+}
+
+main > section {
+    box-sizing: border-box;
+}
+
+main > section:first-of-type {
+    padding-right: 1rem;
 }
 
 #main-nav {
@@ -68,8 +83,58 @@ footer {
 i.icon {
     font-family: "Material Symbols Sharp", sans-serif;
     font-style: normal !important;
+
+    width: 1.5rem;
+    height: 1.5rem;
+    align-items: center;
+    display: inline-flex;
+    flex-shrink: 0;
+    justify-content: center;
+    transition-duration: var(--animation-standard);
+    transition-property: color;
+}
+
+.navbar > .navbar-item {
+    padding: 0.5rem 0.75rem;
+}
+
+.navbar-item svg {
+    max-height: 1.75rem;
+}
+
+.navbar-item > p {
+    margin: 0;
+}
+
+.title:has(+ .subtitle)  {
+    margin-bottom: 0;
+}
+
+.subtitle {
+    margin-top: 0;
 }
 
 #contacts p {
     align-items: flex-start;
+}
+
+progress {
+    border: none;
+}
+
+progress::-moz-progress-bar, progress::-webkit-progress-bar {
+    background-color: var(--primary-text);
+}
+
+.cell > img {
+    width: 100%;
+    height: auto;
+    margin: auto 0;
+}
+
+.pure-form input[type], .pure-form textarea {
+    background-color: var(--primary-dark);
+    border: 1px solid var(--primary-border);
+    box-shadow: none;
+    color: var(--text);
 }

@@ -1,24 +1,25 @@
 ---
-import "bulma/sass/layout/footer.scss";
+import {execSync} from "node:child_process";
 const today = new Date();
+const commitHash = execSync("git rev-parse --short HEAD").toString().trim();
 ---
 <footer class="footer">
 	<nav class="navbar" role="navigation">
 		<a class="navbar-item" href="/legal">Impressum</a>
 		<a class="navbar-item" href="/privacy">Datenschutz</a>
 	</nav>
-	<p>&copy; {today.getFullYear()} Friedrich Zimniak <span>Generiert: {new Intl.DateTimeFormat("de-de", {dateStyle: "short", timeStyle: "medium", timeZone: "Europe/Berlin"}).format(today)}</span></p>
+	<p>&copy; {today.getFullYear()} Friedrich Zimniak <span>Version {commitHash}, generiert am {new Intl.DateTimeFormat("de-de", {dateStyle: "short", timeStyle: "medium", timeZone: "Europe/Berlin"}).format(today)}</span></p>
 </footer>
 <style lang="scss">
 	footer {
+		background-color: var(--primary-background);
+		padding: 1rem 1.1rem;
 		z-index: 20;
-		--bulma-footer-padding: 1rem 1.1rem 1rem;
 		color: #efefef;
 	}
 
 	footer nav {
-		background-color: var(--bulma-footer-background-color);
-		color: var(--bulma-primary-50);
+		color: var(--primary-text);
 	}
 
 	p > span {

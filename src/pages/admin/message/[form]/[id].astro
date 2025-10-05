@@ -3,8 +3,6 @@ import FormattedDate from "../../../../components/FormattedDate.astro";
 import { MESSAGES_DIR } from "../../../../config";
 import Page from "../../../../layouts/Page.astro";
 import { readFile } from "node:fs/promises";
-import "bulma/sass/components/card.scss";
-import "bulma/sass/elements/button.scss";
 
 export const prerender = false;
 
@@ -39,7 +37,6 @@ const message = JSON.parse((await readFile(MESSAGES_DIR + "/" + Astro.params.for
     }
 
     .card-header {
-        border-bottom: 1px solid var(--bulma-link);
         flex-direction: column;
     }
 

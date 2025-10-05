@@ -18,7 +18,7 @@ $light-up-color: rgba(255, 255, 255, 1);
 }
 
 body {
-    transition: background 0.5s;
+    transition: background-color 0.5s;
 }
 
 body:has(.toggle-switch-chk:not(:checked)) {
@@ -26,7 +26,7 @@ body:has(.toggle-switch-chk:not(:checked)) {
 }
 
 .toggle-switch {
-    background-color: var(--bulma-primary-10);
+    background-color: var(--primary-background);
     border-radius: 50%;
     padding: 2px;
     color: #fff;
@@ -43,10 +43,11 @@ body:has(.toggle-switch-chk:not(:checked)) {
 .star-container {
     opacity: 0;
     transition: opacity 0.5s;
+    z-index: -10;
 }
 
 input:checked + .toggle-switch {
-    background-color: var(--bulma-hover-25);
+    background-color: var(--primary-background-hover);
 }
 
 input:checked + label + .star-container {
@@ -88,7 +89,7 @@ input:checked + label + .star-container {
 @media screen and (min-width: 1000px) {
     @for $i from 1 through 3 {
         #stars-#{$i} {
-            box-shadow: multiple-box-shadow((4 - $i) * 200);
+            box-shadow: multiple-box-shadow((4 - $i) * 100);
         }
     }
 }

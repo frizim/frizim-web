@@ -18,8 +18,8 @@ const { title, description } = Astro.props;
 		<div class="stars" id="stars-2"></div>
 		<div class="stars" id="stars-3"></div>
 	</div>
-	<main class="container columns">
-		<section class="column is-one-third">
+	<main class="container pure-g">
+		<section class="pure-u-1 pure-u-md-1-3">
 			<h1 class="title">Friedrich Zimniak</h1>
 			<h2 class="subtitle">Softwareentwickler</h2>
 			<div class="main-navs">
@@ -30,19 +30,18 @@ const { title, description } = Astro.props;
 						<Fragment slot="opener"><i class="icon">contact_mail</i>Kontakt</Fragment>
 						<div id="contacts">
 							<p class="navbar-item"><i class="icon">email</i><a href="mailto:work@frizim.com" aria-label="E-Mail-Adresse">work@frizim.com</a></p>
-							<p class="navbar-item"><i class="icon"></i>GPG: <a href="https://openpgpkey.frizim.com/.well-known/openpgpkey/frizim.com/hu/hj4q795sttt3cnrqa5io184m6uk8icxy">0AB1 C30B E250 04E6 1C62 7DD9 CAE1 EB3D F94B 9EBB</a></p>
-							<p class="navbar-item"><BrandIcon icon="signal" width="24" height="16" color="var(--bulma-navbar-item-color)" /><a href="https://signal.me/#eu/UtT3Zw9Auu9y6Mtg8J828quZj-Bz1POtu3QFedgDe_mpN51UerhPq5kwl6O-W4wcp" aria-label="Signal-Account">@friedrich.668</a></p>
+							<p class="navbar-item"><i class="icon">key</i>GPG: <a href="https://openpgpkey.frizim.com/.well-known/openpgpkey/frizim.com/hu/hj4q795sttt3cnrqa5io184m6uk8icxy">0AB1 C30B E250 04E6 1C62 7DD9 CAE1 EB3D F94B 9EBB</a></p>
 						</div>
 					</NavDropdown>
 				</nav>
 				<nav class="navbar is-text-centered is-justify-content-center">
-					<a class="navbar-item" href="https://github.com/frizim" aria-label="GitHub" rel="noopener" target="_blank"><BrandIcon icon="github-icon" color="var(--bulma-navbar-item-color)" /></a>
-					<a class="navbar-item" href="https://keyoxide.frizim.com" aria-label="GPG-Keys"><BrandIcon icon="gnupg-icon" color="var(--bulma-navbar-item-color)" /></a>
-					<a class="navbar-item" href="https://www.linkedin.com/in/friedrich-z" aria-label="LinkedIn" rel="noopener" target="_blank"><BrandIcon icon="linkedin-icon" color="var(--bulma-navbar-item-color)" /></a>
+					<a class="navbar-item" href="https://github.com/frizim" aria-label="GitHub" rel="noopener" target="_blank"><BrandIcon width="28" icon="github-icon" color="var(--navbar-item-color)" /></a>
+					<a class="navbar-item" href="https://keyoxide.frizim.com" aria-label="GPG-Keys"><BrandIcon width="28" icon="gnupg-icon" color="var(--navbar-item-color)" /></a>
+					<a class="navbar-item" href="https://www.linkedin.com/in/friedrich-z" aria-label="LinkedIn" rel="noopener" target="_blank"><BrandIcon width="28" icon="linkedin-icon" color="var(--navbar-item-color)" /></a>
 				</nav>
 			</div>
 		</section>
-		<section class="column">
+		<section class="pure-u-1 pure-u-md-2-3">
 			<slot/>
 		</section>
 	</main>
