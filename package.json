@@ -17,7 +17,7 @@
     "@fontsource/material-symbols-sharp": "^5.2.30",
     "@iconify-json/logos": "^1.2.10",
     "argon2": "^0.44.0",
-    "astro": "^5.16.5",
+    "astro": "=5.16.3",
     "fastify": "^5.6.1",
     "htmx.org": "^2.0.4",
     "purecss": "^3.0.0",
