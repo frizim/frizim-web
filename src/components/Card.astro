@@ -12,7 +12,7 @@ const {
     <div class="card">
         <div class="card-header">
             <p class="card-header-icon p-0 m-2"><Image src={icon} width="64" alt="" /></p>
-            <h1 class="card-header-title title">{title}</h1>
+            <h2 class="card-header-title title">{title}</h2>
             <slot name="header" />
         </div>
         <div class="card-content">
@@ -50,6 +50,7 @@ const {
     }
 
     .card-header-title {
+        font-size: 1.5rem;
         margin-top: 0;
     }
 
@@ -67,6 +68,8 @@ const {
         grid-row: 2 / 2;
         text-wrap: wrap;
         padding: 1.5rem;
+        margin-top: auto;
+        margin-bottom: auto;
     }
 
     .card-footer {
