@@ -1,14 +1,13 @@
 ---
-import {execSync} from "node:child_process";
 const today = new Date();
-const commitHash = execSync("git rev-parse --short HEAD").toString().trim();
+import {COMMIT_HASH, BUILD_DATE} from "astro:env/server";
 ---
 <footer class="footer">
 	<nav class="navbar" role="navigation">
 		<a class="navbar-item" href="/legal">Impressum</a>
 		<a class="navbar-item" href="/privacy">Datenschutz</a>
 	</nav>
-	<p>&copy; {today.getFullYear()} Friedrich Zimniak <span>Version {commitHash}, generiert am {new Intl.DateTimeFormat("de-de", {dateStyle: "short", timeStyle: "medium", timeZone: "Europe/Berlin"}).format(today)}</span></p>
+	<p>&copy; {today.getFullYear()} Friedrich Zimniak <span>Version {COMMIT_HASH}, generiert am {new Intl.DateTimeFormat("de-de", {dateStyle: "short", timeStyle: "medium", timeZone: "Europe/Berlin"}).format(BUILD_DATE)}</span></p>
 </footer>
 <style lang="scss">
 	footer {
