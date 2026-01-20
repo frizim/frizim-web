@@ -36,7 +36,7 @@ const files = (await readdir(MESSAGES_DIR + "/" + Astro.params.form))
             </tr>
         </thead>
         <tbody>
-            {files.map((msg: Message) => (
+            {files.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime()).map((msg: Message) => (
                 <tr>
                     <td><a href={"/admin/message/" + Astro.params.form + "/" + msg.id}>{msg.id}</a></td>
                     <td>{msg.email}</td>
