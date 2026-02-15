@@ -11,7 +11,7 @@ import NavDropdown from '../components/NavDropdown.astro';
 const { title, description } = Astro.props;
 ---
 <Skeleton title={title} description={description}>
-	<input class="toggle-switch-chk" name="toggle-stars" id="toggle-stars" type="checkbox" checked="checked">
+	<input class="toggle-switch-chk" name="toggle-stars" id="toggle-stars" type="checkbox">
 	<label class="toggle-switch" for="toggle-stars" aria-label="Sterne ein/ausschalten"><i class="icon">moon_stars</i></label>
 	<div class="star-container">
 		<div class="stars" id="stars-1"></div>
@@ -35,9 +35,9 @@ const { title, description } = Astro.props;
 					</NavDropdown>
 				</nav>
 				<nav class="navbar is-text-centered is-justify-content-center">
-					<a class="navbar-item" href="https://github.com/frizim" aria-label="GitHub" rel="noopener" target="_blank"><BrandIcon width="28" icon="github-icon" color="var(--navbar-item-color)" /></a>
-					<a class="navbar-item" href="https://keyoxide.frizim.com" aria-label="GPG-Keys"><BrandIcon width="28" icon="gnupg-icon" color="var(--navbar-item-color)" /></a>
-					<a class="navbar-item" href="https://www.linkedin.com/in/friedrich-z" aria-label="LinkedIn" rel="noopener" target="_blank"><BrandIcon width="28" icon="linkedin-icon" color="var(--navbar-item-color)" /></a>
+					<a class="navbar-item navbar-icon" href="https://github.com/frizim" aria-label="GitHub" rel="noopener" target="_blank"><BrandIcon width="28" icon="github-icon" color="var(--navbar-item-color)" /></a>
+					<a class="navbar-item navbar-icon" href="https://keyoxide.frizim.com" aria-label="GPG-Keys"><BrandIcon width="28" icon="gnupg-icon" color="var(--navbar-item-color)" /></a>
+					<a class="navbar-item navbar-icon" href="https://www.linkedin.com/in/friedrich-z" aria-label="LinkedIn" rel="noopener" target="_blank"><BrandIcon width="28" icon="linkedin-icon" color="var(--navbar-item-color)" /></a>
 				</nav>
 			</div>
 		</section>
@@ -47,3 +47,4 @@ const { title, description } = Astro.props;
 	</main>
 	<Footer />
 </Skeleton>
+<script is:inline src="/base.js" defer></script>

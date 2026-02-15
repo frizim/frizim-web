@@ -10,12 +10,15 @@ const active = href ? href == Astro.routePattern : false;
     .navbar-item {
         position: relative;
 		display: flex;
-        padding: 0.5rem 0;
         width: 100%;
         user-select: none;
-        color: var(--primary-text);
+        color: var(--primary);
         line-height: 1.5;
-	}
+    
+        i {
+            margin-right: 8px;
+        }
+    }
 
     .navbar-item > svg {
         max-height: 1.75rem;
@@ -31,7 +34,8 @@ const active = href ? href == Astro.routePattern : false;
 
     .navbar-item span {
         width: 0;
-        border-bottom: 2px solid hsl(178deg, 83%, 31%);
+        margin-top: 4px;
+        border-bottom: 2px solid var(--primary);
         transition: width 0.5s;
         position: absolute;
         bottom: 0;

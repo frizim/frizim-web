@@ -16,10 +16,10 @@ const skill = Astro.props.skill as Skill;
 <style>
     .skill-cell {
 		text-align: center;
-		background-color: var(--primary-background);
-		border-radius: 1em;
+		background-color: var(--card-background);
+		border-radius: var(--card-radius);
 		padding: 1em 0.5em;
-		color: var(--primary-text);
+		color: var(--primary);
 		font-weight: bold;
 		flex-basis: 20%;
 		flex-grow: 1;
@@ -36,11 +36,11 @@ const skill = Astro.props.skill as Skill;
 	}
 
 	.skill-cell:hover {
-		background-color: var(--primary-background-hover);
+		background-color: var(--card-hover);
 	}
 
 	.skill-cell:has(> input:checked) {
-        background-color: var(--primary-background-hover);
+        background-color: var(--card-hover);
 		flex-basis: 100%;
 		max-width: 100%;
 		aspect-ratio: 1 / 1;
@@ -51,6 +51,6 @@ const skill = Astro.props.skill as Skill;
 		height: 0.25em;
 		width: 100%;
 		margin: 0.2em 0;
-		background-color: var(--primary-dark);
+		background-color: var(--secondary);
 	}
 </style>

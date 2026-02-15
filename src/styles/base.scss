@@ -2,46 +2,96 @@
 @use "@fontsource/inconsolata";
 @use "purecss/build/pure-min.css";
 @use "purecss/build/grids-responsive-min.css";
-@use "stars.scss";
 
 html, body {
     min-height: 100vh;
 }
 
-:root {
-    --primary-dark: hsla(171deg, 100%, 6%, 1);
-    --primary-background-medium: hsl(178deg, 85%, 9%);
-    --primary-background: hsla(171deg, 100%, 11%, 1);
-    --primary-text: hsla(171deg, 100%, 51%, 1);
-    --primary-text-hover: hsla(171deg, 100%, 81%, 1);
-    --primary-background-hover: hsl(178deg,83%,21%);
-    --primary-border: hsl(178,85%,21%);
-    --text: rgb(223, 223, 223);
-    --navbar-item-color: var(--primary-text);
-    --animation-standard: 0.3s;
+.toggle-switch {
+    background-color: var(--primary-background);
+    border-radius: 50%;
+    padding: 2px;
+    color: var(--text);
+    position: fixed;
+    top: 1em;
+    right: 1em;
+    z-index: 10;
+    width: 1.5rem;
+    height: 1.5rem;
 
-    --card-radius: 0.75rem;
+    i {
+        padding-left: 2px;
+        padding-top: 2px;
+    }
+}
+
+.toggle-switch-chk {
+    display: none;
+}
+
+input:checked + .toggle-switch {
+    background-color: var(--primary-background-hover);
+}
+
+input:checked + label + .star-container {
+    opacity: 1;
 }
 
 body {
+    --background: hsl(222, 47%, 5%);
+    --text: #dfdfdf;
+    --primary: hsl(188, 86%, 53%);
+    --secondary: #64748b;
+
+    --primary-hover: hsl(188, 86%, 60%);
+
+    --card-background: hsl(222, 47%, 12%);
+    --card-border: 1px solid var(--secondary);
+    --card-radius: 0.5rem;
+    --card-hover: hsl(222, 47%, 20%);
+
+    --nav-link: var(--primary);
+    --navbar-item-color: var(--primary);
+
+    --animation-standard: 0.3s;
+
     display: grid;
     grid-template-rows: 0fr 1fr 0fr;
-    background: radial-gradient(ellipse at bottom, #1d1d2d 0%, #0d0d0d 100%);
-    background-color: #0d0d0d;
-    background-attachment: fixed;
+    background-color: var(--background);
     color: var(--text);
     font-family: 'Inconsolata', monospace;
     font-size: 18px;
+    transition: background-color 0.5s;
+}
+
+@mixin light-mode {
+    --background: hsl(222, 47%, 98%);
+    --text: #080808;
+    --primary: hsl(204, 99%, 31%);
+
+    --primary-hover: hsl(204, 99%, 41%);
+
+    --card-background: hsl(222, 47%, 90%);
+    --card-border: 1px solid var(--secondary);
+    --card-radius: 0.5rem;
+    --card-hover: hsl(222, 47%, 75%);
+
+    --nav-link: var(--primary);
+    --navbar-item-color: var(--primary);
+}
+
+body.light, body:has(input:checked + .toggle-switch) {
+    @include light-mode();
 }
 
 a, a:visited {
     text-decoration: none;
-    color: var(--primary-text);
+    color: var(--primary);
     transition: color 0.3s;
 }
 
 a:hover {
-    color: var(--primary-text-hover);
+    color: var(--primary-hover);
 }
 
 a svg path {
@@ -49,7 +99,7 @@ a svg path {
 }
 
 a:hover svg path {
-    fill: var(--primary-text-hover);
+    fill: var(--primary-hover);
 }
 
 main.container {
@@ -84,8 +134,6 @@ i.icon {
     font-family: "Material Symbols Sharp", sans-serif;
     font-style: normal !important;
 
-    width: 1.5rem;
-    height: 1.5rem;
     align-items: center;
     display: inline-flex;
     flex-shrink: 0;
@@ -94,8 +142,9 @@ i.icon {
     transition-property: color;
 }
 
-.navbar > .navbar-item {
-    padding: 0.5rem 0.75rem;
+.navbar {
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 .navbar-item svg {
@@ -123,7 +172,7 @@ progress {
 }
 
 progress::-moz-progress-bar, progress::-webkit-progress-bar {
-    background-color: var(--primary-text);
+    background-color: var(--primary);
 }
 
 .cell > img {
@@ -133,7 +182,7 @@ progress::-moz-progress-bar, progress::-webkit-progress-bar {
 }
 
 .pure-form input[type], .pure-form textarea {
-    background-color: var(--primary-dark);
+    background-color: var(--card-background);
     border: 1px solid var(--primary-border);
     box-shadow: none;
     color: var(--text);
