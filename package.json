@@ -1,7 +1,7 @@
 {
   "name": "frizim-web",
   "type": "module",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -10,7 +10,7 @@
     "pw": "node hash.js"
   },
   "dependencies": {
-    "@astrojs/node": "=9.5.3",
+    "@astrojs/node": "=9.4.6",
     "@fastify/middie": "^9.1.0",
     "@fastify/static": "^9.0.0",
     "@fontsource/inconsolata": "^5.2.8",
