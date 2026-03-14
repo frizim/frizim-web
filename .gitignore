@@ -7,6 +7,7 @@ npm-debug.log*
 # build output
 dist/
 .astro/
+target/
 
 # contact form messages
 messages/

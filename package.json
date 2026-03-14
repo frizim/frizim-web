@@ -10,24 +10,24 @@
     "pw": "node hash.js"
   },
   "dependencies": {
-    "@astrojs/node": "=9.4.6",
-    "@fastify/middie": "^9.1.0",
+    "@astrojs/node": "^10.0.1",
+    "@fastify/middie": "^9.3.1",
     "@fastify/static": "^9.0.0",
     "@fontsource/inconsolata": "^5.2.8",
-    "@fontsource/material-symbols-sharp": "^5.2.35",
+    "@fontsource/material-symbols-sharp": "^5.2.38",
     "@iconify-json/logos": "^1.2.10",
     "argon2": "^0.44.0",
-    "astro": "^5.17.2",
-    "fastify": "^5.7.4",
+    "astro": "^6.0.4",
+    "fastify": "^5.8.2",
     "htmx.org": "^2.0.4",
     "purecss": "^3.0.0",
     "unstorage": "^1.17.4"
   },
   "devDependencies": {
-    "@astrojs/mdx": "^4.3.13",
-    "@astrojs/sitemap": "^3.6.0",
-    "autoprefixer": "^10.4.24",
-    "cssnano": "^7.1.2",
-    "sass": "^1.97.3"
+    "@astrojs/mdx": "^5.0.0",
+    "@astrojs/sitemap": "^3.7.1",
+    "autoprefixer": "^10.4.27",
+    "cssnano": "^7.1.3",
+    "sass": "^1.98.0"
   }
 }
