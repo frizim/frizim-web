@@ -34,7 +34,7 @@ export default defineConfig({
     schema: {
       COMMIT_HASH: envField.string({
         optional: true,
-        default: "1.2.0",
+        default: "1.2.2",
         context: "server",
         access: "public",
         min: 5,

@@ -1,5 +1,6 @@
 import { file, glob } from 'astro/loaders';
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from "astro:content";
+import { z } from 'astro/zod';
 
 const skill = defineCollection({
 	loader: file("./src/content/skills.json"),
@@ -16,21 +17,6 @@ const skill = defineCollection({
 	})
 });
 
-const project = defineCollection({
-	loader: glob({base: "./src/content/projects", pattern: "*.md"}),
-	schema: ({image}) => z.object({
-		name: z.string(),
-		state: z.enum(["idea", "planning", "wip", "alpha", "beta", "release", "archived"]),
-		repo: z.string().optional(),
-		icon: image(),
-		stack: z.array(z.object({
-			name: z.string(),
-			icon: z.string().optional(),
-			logo: image().optional()
-		}))
-	})
-});
-
 const article = defineCollection({
 	loader: glob({base: "./src/content/articles", pattern: "*.{md,mdx}"}),
 	schema: z.object({
@@ -38,4 +24,4 @@ const article = defineCollection({
 	})
 });
 
-export const collections = { skill, project, article };
+export const collections = { skill, article };
