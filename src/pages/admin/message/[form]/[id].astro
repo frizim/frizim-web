@@ -25,7 +25,7 @@ const message = JSON.parse((await readFile(MESSAGES_DIR + "/" + Astro.params.for
         <div class="card-header">
             <h1 class="card-header-title">Von {message.email}</h1>
             <p>ID: {message.id}</p>
-            <p>Erstellt am: <FormattedDate date={new Date(message.created)}></p>
+            <p>Erstellt am: <FormattedDate date={new Date(message.created)} /></p>
         </div>
         <pre class="card-content">{message.message}</pre>
     </div>

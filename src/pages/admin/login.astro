@@ -37,7 +37,7 @@ if(Astro.request.method === "POST") {
 <Page title="Login">
     <form method="post" action="/admin/login" class="pure-form pure-form-stacked">
         <label class="label" for="password">Passwort</label>
-        <input class="input" type="password" name="password" id="password" minlength="8" maxlength="500" required autocomplete="current-password"></textarea>
+        <input class="input" type="password" name="password" id="password" minlength="8" maxlength="500" required autocomplete="current-password">
         <input type="hidden" name="redir" value={Astro.url.searchParams.get("redir")}>
         <button class="pure-button pure-button-primary" type="submit">Anmelden</button>
     </form>
